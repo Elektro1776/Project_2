@@ -5,6 +5,7 @@ const path = require('path');
 const app = express();
 const port = process.env.PORT || 3000;
 const homeRouter = require('./src/controllers/homeController');
+const slackRouter = require('./src/apps/slackController');
 app.set('views', __dirname + '/src/views');
 app.engine('handlebars', exphbs({
   defaultLayout: __dirname + '/src/views/layouts/main.handlebars',
@@ -13,6 +14,7 @@ app.engine('handlebars', exphbs({
 app.set('view engine', 'handlebars');
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(homeRouter);
+app.use(slackRouter);
 app.listen(port, () => {
   console.log('SERVER IS LISTENING ON ', port);
 })
