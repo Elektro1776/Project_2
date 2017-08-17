@@ -1,5 +1,5 @@
 var twilio = require('twilio');
-var twilInfo = require("./twilkey.js");
+var twilInfo = require("./twilkey2.js");
 var accountSid = twilInfo.id; // Your Account SID from www.twilio.com/console
 var authToken = twilInfo.token;   // Your Auth Token from www.twilio.com/console
 
