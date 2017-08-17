@@ -6,7 +6,7 @@ router.post('/slack', (req, res) => {
   res.send("Hey yall we got slack integration!");
 
 });
-router.post('/slack/getTasks', (req, res) => {
+router.post('/slack/getProjectTasks', (req, res) => {
   res.send('We got tasks!')
 })
 
