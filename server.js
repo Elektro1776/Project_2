@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
+const path = require('path');
 const app = express();
 const port = process.env.PORT || 3000;
 const homeRouter = require('./src/controllers/homeController');
@@ -10,6 +11,7 @@ app.engine('handlebars', exphbs({
   partialsDir: __dirname + '/src/views/partials'
 }))
 app.set('view engine', 'handlebars');
+app.use(express.static(path.join(__dirname, 'public')))
 app.use(homeRouter);
 app.listen(port, () => {
   console.log('SERVER IS LISTENING ON ', port);
