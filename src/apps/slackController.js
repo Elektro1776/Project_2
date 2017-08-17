@@ -6,3 +6,5 @@ router.post('/slack', (req, res) => {
   res.send("Hey!");
 
 })
+
+module.exports = router;
