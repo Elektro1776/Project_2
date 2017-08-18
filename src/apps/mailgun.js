@@ -3,7 +3,7 @@ var api_key = mailKeyObj.key;
 var path = require('path');
 var domain = mailKeyObj.domain;
 var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
-var filepath = ""
+var filepath = "";
 // path.join(__dirname, '../../public/assets/images/burger.png');
 if (filepath === "") {
   var data = {

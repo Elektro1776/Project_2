@@ -6,6 +6,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 const homeRouter = require('./src/controllers/homeController');
 const slackRouter = require('./src/apps/slackController');
+const passport = require('passport');
 app.set('views', __dirname + '/src/views');
 app.engine('handlebars', exphbs({
   defaultLayout: __dirname + '/src/views/layouts/main.handlebars',
