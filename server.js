@@ -12,7 +12,9 @@ app.engine('handlebars', exphbs({
   partialsDir: __dirname + '/src/views/partials'
 }))
 app.set('view engine', 'handlebars');
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(homeRouter);
 app.use(slackRouter);
 app.listen(port, () => {
