@@ -1,4 +1,5 @@
 src/apps/twilkeys.js
+src/apps/mailkey.js
 # Logs
 logs
 *.log
