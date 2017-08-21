@@ -16,6 +16,15 @@ app.set('view engine', 'handlebars');
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(homeRouter);
 app.use(slackRouter);
+app.get('/testcodesnip', (req, res) => {
+  res.sendFile(path.join(__dirname, "public/assets/testCode/scriptcreator.html"));
+});
+app.get('/testcodesnipcreate', (req, res) => {
+  res.sendFile(path.join(__dirname, "public/assets/testCode/scriptwriter.html"));
+});
+app.get('/testgithub', (req, res) => {
+  res.sendFile(path.join(__dirname, "public/assets/testCode/testgithubintegr.html"));
+});
 app.listen(port, () => {
   console.log('SERVER IS LISTENING ON ', port);
 })
