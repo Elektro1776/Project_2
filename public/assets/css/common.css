@@ -5,10 +5,87 @@ body {
   display: flex;
   flex-direction: column;
   background-color: #336dea;
+  transition: background-color .5s;
 }
 .content {
   flex: 1 0 auto;
 }
 .help-block {
   color: #fff;
+}
+
+.navbar {
+  background-color: #3c76f2;
+}
+
+.navbar-inverse .navbar-nav>li>a{
+    color: white;
+}
+
+.navbar-collapse {
+
+  background-color: black;
+}
+
+.navbar-inverse {
+  background-color: black;
+}
+
+.utile {
+
+  background-color: #40f098;
+
+}
+
+a:hover {
+  color: blue;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover, .offcanvas a:focus{
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#main {
+    transition: margin-right .5s;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.nav navbar-right{
+  padding-top: 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
 }
