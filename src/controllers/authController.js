@@ -6,20 +6,17 @@ console.log(' WHAT IS THE STRATEGY', GitLabStrategy.authenticate);
 router.get('/login', (req, res) => {
   res.render('login', { title: 'Trilll'});
 })
-router.get('/gitlab/login',
-  GitLabStrategy.authenticate('gitlab', (status) => {
-    console.log(' STATUS???', status);
-  }),
+router.get('/auth/gitlab',
+  GitLabStrategy.authenticate('gitlab'),
   (req, res) => {
-    console.log(' WHAT IS GOING ON ?',);
     res.sendStatus(200)
   }
 )
   // res.json({message: 'Login bitttchhhhh'})
-router.get('/auth/gitlab',
+router.get('/auth/gitlab/authorized',
   GitLabStrategy.authenticate('gitlab', { failureRedirect: '/' }),
   function(req, res) {
-    console.log(' WHAT IS THIS????', req);
+    // console.log(' WHAT IS THIS????', req);
     // Successful authentication
     res.json(req.user);
 })
