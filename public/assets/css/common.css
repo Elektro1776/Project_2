@@ -1,0 +1,14 @@
+html, body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: #336dea;
+}
+.content {
+  flex: 1 0 auto;
+}
+.help-block {
+  color: #fff;
+}
