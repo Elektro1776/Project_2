@@ -32,6 +32,9 @@
 <script src="/assets/snippetfeature/src-min/ace.js" type="text/javascript" charset="utf-8"></script>
 <script>
     var editor = ace.edit("editor");
+    editor.getSession().setUseWrapMode(true);
+    editor.setHighlightActiveLine(true);
+    editor.setReadOnly(false);  // false to make it editable
     editor.setTheme("ace/theme/twilight");
     editor.session.setMode("ace/mode/javascript");
 </script>

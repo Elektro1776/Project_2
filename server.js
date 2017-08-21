@@ -20,7 +20,7 @@ app.get('/testcodesnip', (req, res) => {
   res.sendFile(path.join(__dirname, "public/assets/testCode/scriptcreator.html"));
 });
 app.get('/testcodesnipcreate', (req, res) => {
-  res.sendFile(path.join(__dirname, "public/assets/snippetfeature/jquery-linedtextarea.html"));
+  res.sendFile(path.join(__dirname, "public/assets/snippetfeature/codesnippet.html"));
 });
 app.get('/testgithub', (req, res) => {
   res.sendFile(path.join(__dirname, "public/assets/testCode/testgithubintegr.html"));
