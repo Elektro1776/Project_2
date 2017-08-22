@@ -120,6 +120,12 @@ height: 8%
   margin: 25px 0 25px 0;
 }
 
+.buttonHome {
+
+  height: 25px;
+  padding-right: 5px;
+}
+
 .btn-default {
   margin-bottom: 10px;
   text-align:center;
