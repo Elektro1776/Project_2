@@ -12,11 +12,9 @@ router.get('/auth/gitlab',
     res.sendStatus(200)
   }
 )
-  // res.json({message: 'Login bitttchhhhh'})
 router.get('/auth/gitlab/authorized',
   GitLabStrategy.authenticate('gitlab', { failureRedirect: '/' }),
   function(req, res) {
-    // console.log(' WHAT IS THIS????', req);
     // Successful authentication
     res.json(req.user);
 })
