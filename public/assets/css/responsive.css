@@ -34,9 +34,15 @@ pre {
   .side-collapse.in {
     width:0;
   }
+  .nav.navbar-right {
+    padding-top: 0px;
+  }
 }
 
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
+  .jumbotron{
+    padding-left: 10px;
+  }
 }

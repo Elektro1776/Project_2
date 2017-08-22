@@ -21,4 +21,10 @@ function closeNav() {
     document.body.style.backgroundColor = "white";
 }
 
+
+$('.carousel').carousel({
+pause: true,
+interval: false
+});
+
 });

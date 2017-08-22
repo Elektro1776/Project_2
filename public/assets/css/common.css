@@ -18,6 +18,28 @@ body {
   background-color: #3c76f2;
 }
 
+.jumbotron {
+  padding: 10px 10px 20px 30px;
+  margin-bottom: 0px;
+
+}
+
+.navbar-brand {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    text-align: center;
+    margin: auto;
+    padding:0px;
+
+}
+
+#logoNav {
+  height: 100%;
+  margin: auto;
+}
+
 .navbar-inverse .navbar-nav>li>a{
     color: white;
 }
@@ -77,15 +99,30 @@ a:hover {
 
 #main {
     transition: margin-right .5s;
-    padding-top: 15px;
-    padding-bottom: 15px;
 }
 
-.nav navbar-right{
-  padding-top: 10px;
+.nav.navbar-right {
+  padding-top: 15px;
 }
 
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
+.footer {
+
+background:black;
+color: white;
+height: 8%
+}
+
+.iconPosition {
+  text-align:center;
+}
+
+.glyphicon {
+  width: 50px;
+  padding-top: 15px;
+}
+
+.carousel-inner>.item>a>img, .carousel-inner>.item>img {
+  line-height: 1;
+  max-height: 450px;
+  margin: auto;
 }
