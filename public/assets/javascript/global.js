@@ -27,4 +27,22 @@ pause: true,
 interval: false
 });
 
+// for the modal
+
+$('#myModal').on('shown.bs.modal', function () {
+  $('#myInput').focus()
+});
+
+// for the popover search
+
+$('#popover').popover({
+    html : true,
+    title: function() {
+      return $("#popover-head").html();
+    },
+    content: function() {
+      return $("#popover-content").html();
+    }
+});
+
 });
