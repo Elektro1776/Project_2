@@ -8,6 +8,8 @@ const path = require('path');
 const app = express();
 const port = process.env.PORT || 3000;
 const homeRouter = require('./src/controllers/homeController');
+const projectsRouter = require('./src/controllers/projectsController');
+const userStoriesRouter = require('./src/controllers/userStoriesController');
 const slackRouter = require('./src/apps/slackController');
 const authRouter = require('./src/controllers/authController');
 app.set('views', __dirname + '/src/views');
@@ -27,6 +29,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(homeRouter);
+app.use(userStoriesRouter);
+app.use(projectsRouter);
 app.use(slackRouter);
 app.use(authRouter);
 app.listen(port, () => {
