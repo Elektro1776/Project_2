@@ -29,6 +29,15 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(homeRouter);
 app.use(slackRouter);
 app.use(authRouter);
+app.get('/testcodesnip', (req, res) => {
+  res.sendFile(path.join(__dirname, "public/assets/testCode/scriptcreator.html"));
+});
+app.get('/testcodesnipcreate', (req, res) => {
+  res.sendFile(path.join(__dirname, "public/assets/snippetfeature/codesnippet.html"));
+});
+app.get('/testgithub', (req, res) => {
+  res.sendFile(path.join(__dirname, "public/assets/testCode/testgithubintegr.html"));
+});
 app.listen(port, () => {
   console.log('SERVER IS LISTENING ON ', port);
 })
