@@ -1,0 +1,53 @@
+
+
+<!-- modal structure -->
+
+<!-- Modal structure -->
+
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="userLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="userStoryModal">Create a new user story!</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form>
+          <div class="form-group">
+            <label for="projectName">User Story</label>
+            <input type="email" class="form-control" id="userStory" aria-describedby="userHelp" placeholder="Enter User Story Name">
+          </div>
+          <!-- <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+          </div> -->
+
+          <div class="form-group">
+            <label for="projectDescription">Description</label>
+            <textarea class="form-control" id="projectDescription" rows="3"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="githubDropDown">Rank your User Story:</label>
+            <select class="form-control" id="githubDropDown">
+              <option>High Importance / High Value</option>
+              <option>High Importance / Low Value</option>
+              <option>Low Importance / High Value</option>
+              <option>Low Importance / Low Value</option>
+            </select>
+            <small for= "githubDropDown"> This will help to place your user story on the priority matrix!</small>
+          </div>
+
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
