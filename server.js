@@ -42,6 +42,17 @@ app.get('/testcodesnipcreate', (req, res) => {
 app.get('/testgithub', (req, res) => {
   res.sendFile(path.join(__dirname, "public/assets/testCode/testgithubintegr.html"));
 });
+
+// Potential Github authentification routes
+// app.get('/auth/github',
+//   passport.authenticate('github', { scope: [ 'vdavidhamond@gmail.com' ] }));
+//
+// app.get('/auth/github/callback',
+//   passport.authenticate('github', { failureRedirect: '/login' }),
+//   function(req, res) {
+//     // Successful authentication, redirect home.
+//     res.redirect('/');
+//   });
 app.listen(port, () => {
   console.log('SERVER IS LISTENING ON ', port);
 })
