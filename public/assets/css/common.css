@@ -112,9 +112,33 @@ color: white;
 height: 8%
 }
 
+.modal-content{
+  margin-top: 60px;
+}
+
+.modal-header .close {
+  margin-top: -30px;
+}
+
+.glyphicon-fullscreen {
+  float: right;
+  margin: 20px 10px 0 0;
+}
+
 .iconPosition {
   text-align:center;
 }
+
+.panel-group {
+  margin-top: 20px;
+  padding: 10px 10px 10px 10px
+}
+
+.panel-heading {
+  padding: 30px 30px 30px 15px
+}
+
+
 
 .jumboLogin {
   margin: 25px 0 25px 0;
@@ -131,10 +155,11 @@ height: 8%
   text-align:center;
 }
 
-.glyphicon {
+.icon {
   width: 50px;
   padding-top: 15px;
 }
+
 
 .carousel-inner>.item>a>img, .carousel-inner>.item>img {
   line-height: 1;
