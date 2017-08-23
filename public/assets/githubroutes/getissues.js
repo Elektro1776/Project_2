@@ -1,15 +1,15 @@
 // Get route
-"https://api.github.com/repos/:owner/:repo/issues/"
-Schema:
-body[0].url = "Link to comment"
-body[0].comments_url = "Link to comments associated with this issue"
-body[0].number = "Issue number"
-body[0].title = "issue title"
-body[0].user.login = "User that made the comment"
-body[0].assignee = "user that assigned this issue"
-body[0].assignees = "Users issue was assigned too"
-body[0].comments = "number of comments"
-body[0].body = "body of issue if it exists"
+// "https://api.github.com/repos/:owner/:repo/issues/"
+// Schema:
+// body[0].url = "Link to comment"
+// body[0].comments_url = "Link to comments associated with this issue"
+// body[0].number = "Issue number"
+// body[0].title = "issue title"
+// body[0].user.login = "User that made the comment"
+// body[0].assignee = "user that assigned this issue"
+// body[0].assignees = "Users issue was assigned too"
+// body[0].comments = "number of comments"
+// body[0].body = "body of issue if it exists"
 var body = [
     {
         "url": "https://api.github.com/repos/901david/Flashcard-Fun/issues/25",

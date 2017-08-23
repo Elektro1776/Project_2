@@ -1,8 +1,8 @@
 // GET route
-'https://api.github.com/repos/:owner/:repo/issues/:number/comments'
-body[0].html_url = "Link to actual comment"
-body[0].user.login = "User who posted comment"
-body[0].body = "body of comment"
+// 'https://api.github.com/repos/:owner/:repo/issues/:number/comments'
+// body[0].html_url = "Link to actual comment"
+// body[0].user.login = "User who posted comment"
+// body[0].body = "body of comment"
 
 var body = [
     {

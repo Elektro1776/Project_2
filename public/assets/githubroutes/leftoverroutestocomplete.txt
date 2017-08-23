@@ -3,10 +3,6 @@ get repos //get all repos for a user
 get issues // get all issues for a repo
 create issue // creates an issue for a specific repo
 get comments //get comments for a specific issue
-
-
-To Create:
-
 issues - addAssigneesToIssue //assign to specfic users
 issues - createComment //create a comment on an issue
 issues - edit // edit issue body and/or title
@@ -14,14 +10,16 @@ issues - editComment // edit a comment on an issue
 misc - renderMarkdownRaw //takes in text and sends back rendered markdown
 pullRequests - create //create a pull request
 pullRequests - createComment //create a comment on a  pull request
-pullRequests - getAll //show all pull requests pending
-repos - addCollaborator //add collaborator to repo
-repos - create //create new repo
-repos - createFile //create a new file in repo
-repos - deleteFile //delete file from repo
-repos - edit //edit file in repo
-repos - fork //fork the repo
+pullRequests - getAll //show all pull requests
 repos - getBranch //get a specific branch other than master
+repos - create //create new repo
+repos - addCollaborator //add collaborator to repo
 repos - getCollaborators //show collaboratorson the repo
 repos - removeCollaborator //remove collaborator from repo
+repos - createFile //create a new file in repo
+repos - fork //fork the repo
+
+To Create:
+
 repos - updateFile //update a file on the repo with new body
+repos - deleteFile //delete file from repo

@@ -1,16 +1,16 @@
 // This contains the git route to get all user repos and sample data
 // Get route
-'https://api.github.com/users/:id/repos'
+// 'https://api.github.com/users/:id/repos'
 
 // Sample data
 
 // Key
-body[0].name = "Repo Name"
-body[0].owner.login = "User that owns repo"
-body[0].owner.html_url = "Repo URL"
-body[0].description = "Description of repo"
-body[0].html_url = "Deployed site, if deployed through gitpages"
-body[0].ssh_url = "Clone link for SSH"
+// body[0].name = "Repo Name"
+// body[0].owner.login = "User that owns repo"
+// body[0].owner.html_url = "Repo URL"
+// body[0].description = "Description of repo"
+// body[0].html_url = "Deployed site, if deployed through gitpages"
+// body[0].ssh_url = "Clone link for SSH"
 
 var body = [
     {

@@ -1,18 +1,20 @@
-// // POST Route
-// 'https://api.github.com/repos/:owner/:repo/issues'
-//
-// {"title": "This issue was created with Postman", "body": "very cool...indeed", "assignees": ["901david"]}
+// POST ROUTE
+// 'https://api.github.com/repos/:owner/:repo/issues/:number/assignees'
 
-var response = {
-    "url": "https://api.github.com/repos/901david/Flashcard-Fun/issues/26",
+{"assignees": ["", ""]};
+
+RESPONSE:
+
+var body = {
+    "url": "https://api.github.com/repos/901david/Flashcard-Fun/issues/25",
     "repository_url": "https://api.github.com/repos/901david/Flashcard-Fun",
-    "labels_url": "https://api.github.com/repos/901david/Flashcard-Fun/issues/26/labels{/name}",
-    "comments_url": "https://api.github.com/repos/901david/Flashcard-Fun/issues/26/comments",
-    "events_url": "https://api.github.com/repos/901david/Flashcard-Fun/issues/26/events",
-    "html_url": "https://github.com/901david/Flashcard-Fun/issues/26",
-    "id": 251840048,
-    "number": 26,
-    "title": "This issue was created with Postman",
+    "labels_url": "https://api.github.com/repos/901david/Flashcard-Fun/issues/25/labels{/name}",
+    "comments_url": "https://api.github.com/repos/901david/Flashcard-Fun/issues/25/comments",
+    "events_url": "https://api.github.com/repos/901david/Flashcard-Fun/issues/25/events",
+    "html_url": "https://github.com/901david/Flashcard-Fun/issues/25",
+    "id": 251838352,
+    "number": 25,
+    "title": "test",
     "user": {
         "login": "901david",
         "id": 26396882,
@@ -77,9 +79,8 @@ var response = {
     ],
     "milestone": null,
     "comments": 0,
-    "created_at": "2017-08-22T05:13:52Z",
-    "updated_at": "2017-08-22T05:13:52Z",
+    "created_at": "2017-08-22T04:59:20Z",
+    "updated_at": "2017-08-22T19:15:00Z",
     "closed_at": null,
-    "body": "very cool...indeed",
-    "closed_by": null
+    "body": null
 };
