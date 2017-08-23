@@ -11,7 +11,7 @@ const homeRouter = require('./src/controllers/homeController');
 const projectsRouter = require('./src/controllers/projectsController');
 const userStoriesRouter = require('./src/controllers/userStoriesController');
 const slackRouter = require('./src/apps/slackController');
-const authRouter = require('./src/controllers/authController');
+// const authRouter = require('./src/controllers/authController');
 app.set('views', __dirname + '/src/views');
 app.engine('handlebars', exphbs({
   defaultLayout: __dirname + '/src/views/layouts/main.handlebars',
@@ -32,7 +32,7 @@ app.use(homeRouter);
 app.use(userStoriesRouter);
 app.use(projectsRouter);
 app.use(slackRouter);
-app.use(authRouter);
+// app.use(authRouter);
 app.get('/testcodesnip', (req, res) => {
   res.sendFile(path.join(__dirname, "public/assets/testCode/scriptcreator.html"));
 });
