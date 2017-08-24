@@ -82,6 +82,12 @@ const postToApi = function() {
 };
 
 $(document).ready(function() {
+  $(function() {
+    $("#dueDate").datepicker({
+      showOtherMonths: true,
+      dayNamesMin: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    });
+  });
   $("#userStorySubmit").click(function() {
     /*important tags
     #userStorySubmit - submit button - button clicky thing
