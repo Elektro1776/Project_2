@@ -2,8 +2,9 @@ const express = require("express");
 const router = express.Router();
 
 const validateUserInput = function(req, res) {
-  console.log("Pulling", req);
+  console.log("Pulling", req.body);
 
+  res.redirect("/userstories");
   //make sure the data is sent to database once implemented
 };
 
