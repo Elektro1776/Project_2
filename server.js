@@ -4,6 +4,7 @@ const http = require('http');
 const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 const passport = require('passport');
+var github = require('./src/auth/gitHubAuth.js');
 const path = require('path');
 const app = express();
 const port = process.env.PORT || 3000;
@@ -42,17 +43,24 @@ app.get('/testcodesnipcreate', (req, res) => {
 app.get('/testgithub', (req, res) => {
   res.sendFile(path.join(__dirname, "public/assets/testCode/testgithubintegr.html"));
 });
+// Serializing & Deserializing the user
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
 
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
 // Potential Github authentification routes
-// app.get('/auth/github',
-//   passport.authenticate('github', { scope: [ 'vdavidhamond@gmail.com' ] }));
-//
-// app.get('/auth/github/callback',
-//   passport.authenticate('github', { failureRedirect: '/login' }),
-//   function(req, res) {
-//     // Successful authentication, redirect home.
-//     res.redirect('/');
-//   });
+app.get('/auth/github',
+  passport.authenticate('github', { scope: [ 'user:vdavidhamond@gmail.com' ] }));
+
+app.get('/auth/github/callback',
+  passport.authenticate('github', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
 app.listen(port, () => {
   console.log('SERVER IS LISTENING ON ', port);
 })

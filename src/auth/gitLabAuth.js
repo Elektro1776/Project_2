@@ -1,5 +1,5 @@
 const passport = require('passport');
-var GitLabStrategy = require('passport-gitlab2')
+var GitLabStrategy = require('passport-gitlab2');
 
 module.exports = passport.use( new GitLabStrategy({
     clientID: process.env.GIT_HUB_CLIENT_ID,
