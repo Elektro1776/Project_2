@@ -44,5 +44,19 @@ $('#popover').popover({
       return $("#popover-content").html();
     }
 });
-
+// create click handler to send ajax GET request with the id from the button in
+// the body of the ajax request. On the userStoriesController log out what the
+// req.body is an you should see the id of the project that was clicked
+$('.projectButton').click(function(e) {
+  let projectId = $(this)[0].id;
+  console.log('PROJECT ID TO SEND', projectId);
+  //ajax shit;
+  $.ajax({
+    method: 'GET',
+    url: '/userstories'
+  }).done(function() {
+    window.location.href = '/userstories'
+    console.log(projectId,' WENT SOME WHERE???');
+  })
+})
 });
