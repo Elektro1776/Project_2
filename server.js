@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 const passport = require('passport');
 var github = require('./src/auth/gitHubAuth.js');
+var slack = require('./src/auth/slackAuth.js');
 const path = require('path');
 const app = express();
 const port = process.env.PORT || 3000;
@@ -12,7 +13,7 @@ const homeRouter = require('./src/controllers/homeController');
 const projectsRouter = require('./src/controllers/projectsController');
 const userStoriesRouter = require('./src/controllers/userStoriesController');
 const slackRouter = require('./src/apps/slackController');
-// const authRouter = require('./src/controllers/authController');
+const authRouter = require('./src/controllers/authController');
 app.set('views', __dirname + '/src/views');
 app.engine('handlebars', exphbs({
   defaultLayout: __dirname + '/src/views/layouts/main.handlebars',
@@ -33,7 +34,7 @@ app.use(homeRouter);
 app.use(userStoriesRouter);
 app.use(projectsRouter);
 app.use(slackRouter);
-// app.use(authRouter);
+app.use(authRouter);
 app.get('/testcodesnip', (req, res) => {
   res.sendFile(path.join(__dirname, "public/assets/testCode/scriptcreator.html"));
 });
@@ -51,16 +52,8 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
-// Potential Github authentification routes
-app.get('/auth/github',
-  passport.authenticate('github', { scope: [ 'user:vdavidhamond@gmail.com' ] }));
 
-app.get('/auth/github/callback',
-  passport.authenticate('github', { failureRedirect: '/login' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-  });
+
 app.listen(port, () => {
   console.log('SERVER IS LISTENING ON ', port);
 })
