@@ -41,9 +41,6 @@ app.get('/testcodesnip', (req, res) => {
 app.get('/testcodesnipcreate', (req, res) => {
   res.sendFile(path.join(__dirname, "public/assets/snippetfeature/codesnippet.html"));
 });
-app.get('/testgithub', (req, res) => {
-  res.sendFile(path.join(__dirname, "public/assets/testCode/testgithubintegr.html"));
-});
 // Serializing & Deserializing the user
 passport.serializeUser(function(user, done) {
   done(null, user);
