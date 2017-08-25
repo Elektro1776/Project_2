@@ -34,18 +34,38 @@ const postToApi = function() {
   if (currentStory === true) {
     //returns true then call api & show userstory on page
     console.log(currentUserStory);
+    var progressStyle;
+
+    console.log(typeof currentUserStory.storyProgress);
+
+    switch (parseInt(currentUserStory.storyProgress)) {
+
+        case 0:
+           progressStyle = "notStarted";
+          break;
+        case 1:
+           progressStyle = "inProgress";
+          break;
+        case 2:
+           progressStyle = "completed";
+          break;
+
+    }
+
 
     //append information to the page
     /*
     because of the format we force them to put
     the title in we will be able to use it as a key
+         <p>Description: ${currentUserStory.storyDescription.substring(0, 30)}...</p>
     to retrieve and send to database
     */
     let newStory = `
-    <div id="${currentUserStory.storyTitle}" class="userStory text-left"
-    <h5>${currentUserStory.storyTitle}</h5>
-    <p>${currentUserStory.storyDescription.substring(0, 30)}...</p>
+    <div id="${currentUserStory.storyTitle}" data-toggle="modal" data-target="#otherModal" class="userStory ${progressStyle}">
+    <p id= "storyHeader">${currentUserStory.storyTitle}</p>
+
     `;
+
 
     switch (currentUserStory.selectedMatrixSection) {
       case 4:
@@ -88,7 +108,10 @@ $(document).ready(function() {
       dayNamesMin: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     });
   });
+
   $("#userStorySubmit").click(function() {
+
+
     /*important tags
     #userStorySubmit - submit button - button clicky thing
     #userStory - story title - string
@@ -99,4 +122,5 @@ $(document).ready(function() {
 
     postToApi();
   });
+
 });
