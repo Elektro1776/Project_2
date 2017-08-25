@@ -109,7 +109,8 @@ a:hover {
 
 background:black;
 color: white;
-height: 8%
+height: 8%;
+margin-top: 5px;
 }
 
 .modal-content{
@@ -138,10 +139,47 @@ height: 8%
   padding: 30px 30px 30px 15px
 }
 
+.nav > li.dropdown.open {
+  position: static;
+}
 
+.nav > li.dropdown.open .dropdown-menu {
+  display: table;
+  border-radius: 0px;
+  width: 100%;
+  text-align: center;
+  left: 0;
+  right: 0;
+}
+
+.dropdown-menu > li {
+  display: table-cell;
+  height: 50px;
+  line-height: 50px;
+  vertical-align: middle;
+}
 
 .jumboLogin {
   margin: 25px 0 25px 0;
+}
+
+.notStarted {
+  background: repeating-linear-gradient(
+    45deg,
+    #f72727,
+    #f72727 10px,
+    #ff4c4c 10px,
+    #ff4c4c 20px
+  );
+  color: white;
+}
+
+.inProgress {
+  background-color: #ffbf00;
+}
+
+.completed {
+  background: linear-gradient(green, #cecece);
 }
 
 .buttonHome {

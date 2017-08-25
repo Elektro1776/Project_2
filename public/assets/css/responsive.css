@@ -12,6 +12,12 @@ pre {
   tab-size: 8;
 }
 
+@media screen and (max-width: 767px) {
+  .dropdown-menu > li {
+    display: block;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .side-collapse-container{
     width:100%;
