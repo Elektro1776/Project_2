@@ -1,4 +1,5 @@
 require('dotenv').config();
+var request = require('request');
 const express = require('express');
 const http = require('http');
 const bodyParser = require('body-parser');
@@ -49,8 +50,6 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
-
-
 app.listen(port, () => {
   console.log('SERVER IS LISTENING ON ', port);
-})
+});
