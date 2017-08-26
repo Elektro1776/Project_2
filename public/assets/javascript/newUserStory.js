@@ -26,7 +26,7 @@ const postToApi = function() {
     storyTitle: $("#userStory").val().trim(),
     storyDescription: $("#projectDescription").val().trim(),
     storyProgress: $("#projectStatus").val().trim(),
-    storyDueDate: $("#dueDate").val().trim(),
+    storyDueDate: $(".dueDate").val().trim(),
     selectedMatrixSection: parseInt($("#githubDropDown").val())
   };
   let currentStory = validateUserInput(currentUserStory);
@@ -61,10 +61,11 @@ const postToApi = function() {
     to retrieve and send to database
     */
     let newStory = `
-    <div id="${currentUserStory.storyTitle}" data-toggle="modal" data-target="#otherModal" class="userStory ${progressStyle}">
+    <div id="draggable" data-storyTitle= "${currentUserStory.storyTitle}"  data-toggle="modal" data-target="#otherModal" class="userStory ${progressStyle} ">
     <p id= "storyHeader">${currentUserStory.storyTitle}</p>
 
     `;
+
 
 
     switch (currentUserStory.selectedMatrixSection) {
@@ -103,7 +104,7 @@ const postToApi = function() {
 
 $(document).ready(function() {
   $(function() {
-    $("#dueDate").datepicker({
+    $(".dueDate").datepicker({
       showOtherMonths: true,
       dayNamesMin: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     });
@@ -122,5 +123,20 @@ $(document).ready(function() {
 
     postToApi();
   });
+
+  $("#userStoryUpdate").click(function() {
+
+
+    /*important tags
+    #userStorySubmit - submit button - button clicky thing
+    #userStory - story title - string
+    #projectDescription - description - string
+    #githubDropDown - ranked as value of 4 - 1 from top to bottom.... values can be
+    used for "weighting" of tasks as well as prioritization
+    */
+
+    postToApi();
+  });
+
 
 });
