@@ -1,3 +1,0 @@
-//Post
-https://api.github.com/markdown/raw
-//text posted to this is returned as text but if setup as markdown it is rendered and returned.

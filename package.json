@@ -28,6 +28,7 @@
     "passport-github": "^1.1.0",
     "passport-github2": "^0.1.10",
     "passport-gitlab2": "^3.0.0",
+    "request": "^2.81.0",
     "twilio": "^3.6.2"
   },
   "devDependencies": {
