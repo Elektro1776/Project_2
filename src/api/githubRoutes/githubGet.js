@@ -1,6 +1,6 @@
 
  const express = require('express');
-
+const request = require("request");
  const router = express.Router();
 
 // Get repos for a user
@@ -8,6 +8,10 @@
    let id  = req.body.id;
    console.log(req.body);
    request({
+     headers: {
+       "Accept": "application/vnd.github.v3.full+json",
+       "User-Agent": "request"
+     },
      method: 'GET',
      json: true,
      url: 'https://api.github.com/users/' + id + '/repos'
@@ -22,6 +26,10 @@
    let repo  = req.body.repo;
    console.log(req.body);
    request({
+     headers: {
+       "Accept": "application/vnd.github.v3.full+json",
+       "User-Agent": "request"
+     },
      method: 'GET',
      json: true,
      url: 'https://api.github.com/repos/' + owner + '/' + repo + '/issues'
@@ -37,6 +45,10 @@
    let number  = req.body.number;
    console.log(req.body);
    request({
+     headers: {
+       "Accept": "application/vnd.github.v3.full+json",
+       "User-Agent": "request"
+     },
      method: 'GET',
      json: true,
      url: 'https://api.github.com/repos/' + owner + '/' + repo + '/issues/' + number + '/comments'
@@ -49,11 +61,16 @@
  router.post('/api/github/getCollaborators', (req, res)=>{
    let owner  = req.body.owner;
    let repo  = req.body.repo;
+   let access = req.body.token;
    console.log(req.body);
    request({
+     headers: {
+       "Accept": "application/vnd.github.v3.full+json",
+       "User-Agent": "request"
+     },
      method: 'GET',
      json: true,
-     url: 'https://api.github.com/repos/' + owner + '/' + repo + '/collaborators'
+     url: 'https://api.github.com/repos/' + owner + '/' + repo + '/collaborators?access_token=' + access
    }, (err, response, body) => {
      console.log(' WHAT IS THE BODY?', body);
    })
@@ -66,6 +83,10 @@
    let branch = req.body.branch;
    console.log(req.body);
    request({
+     headers: {
+       "Accept": "application/vnd.github.v3.full+json",
+       "User-Agent": "request"
+     },
      method: 'GET',
      json: true,
      url: 'https://api.github.com/repos/' + owner + '/' + repo + '/branches/' + branch
@@ -80,6 +101,10 @@
    let repo  = req.body.repo;
    console.log(req.body);
    request({
+     headers: {
+       "Accept": "application/vnd.github.v3.full+json",
+       "User-Agent": "request"
+     },
      method: 'GET',
      json: true,
      url: 'https://api.github.com/repos/' + owner + '/' + repo + '/pulls'
