@@ -1,4 +1,5 @@
 require('dotenv').config();
+var request = require('request');
 const express = require('express');
 const http = require('http');
 const bodyParser = require('body-parser');
@@ -11,6 +12,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 const homeRouter = require('./src/controllers/homeController');
 const projectsRouter = require('./src/controllers/projectsController');
+const githubGetRoutes = require('./src/api/githubRoutes/githubRoutes.js');
 const userStoriesRouter = require('./src/controllers/userStoriesController');
 const slackRouter = require('./src/apps/slackController');
 const authRouter = require('./src/controllers/authController');
@@ -35,14 +37,14 @@ app.use(userStoriesRouter);
 app.use(projectsRouter);
 app.use(slackRouter);
 app.use(authRouter);
+app.use(githubGetRoutes);
+
+// Test code ofr the snippet features
 app.get('/testcodesnip', (req, res) => {
   res.sendFile(path.join(__dirname, "public/assets/testCode/scriptcreator.html"));
 });
 app.get('/testcodesnipcreate', (req, res) => {
   res.sendFile(path.join(__dirname, "public/assets/snippetfeature/codesnippet.html"));
-});
-app.get('/testgithub', (req, res) => {
-  res.sendFile(path.join(__dirname, "public/assets/testCode/testgithubintegr.html"));
 });
 // Serializing & Deserializing the user
 passport.serializeUser(function(user, done) {
@@ -52,8 +54,6 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
-
-
 app.listen(port, () => {
   console.log('SERVER IS LISTENING ON ', port);
-})
+});
