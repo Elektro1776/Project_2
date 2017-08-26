@@ -21,22 +21,34 @@ const validateUserInput = function(userInput) {
   }
 };
 
-const postToApi = function() {
-  let currentUserStory = {
+const postToApi = function(modalType) {
+  let currentUserStory;
+  if (modalType === "create") {
+    currentUserStory = {
+     storyTitle: $("#userStory").val().trim(),
+     storyDescription: $("#projectDescription").val().trim(),
+     storyProgress: $("#projectStatus").val().trim(),
+     storyDueDate: $("#createDate").val().trim(),
+     selectedMatrixSection: $("#githubDropDown").val(),
+     method: "create"
+   };
+   console.log("TITLE: ", $("#userStory").val(),"description: ", $("#projectDescription").val(),"status: ", $("#projectStatus").val(),"due date: ", $("#createDate").val(),"matrix quadrant: ", parseInt($("#githubDropDown").val()));
+ } else if (modalType === "update"){
+   currentUserStory = {
     storyTitle: $("#userStory").val().trim(),
     storyDescription: $("#projectDescription").val().trim(),
     storyProgress: $("#projectStatus").val().trim(),
     storyDueDate: $(".dueDate").val().trim(),
-    selectedMatrixSection: parseInt($("#githubDropDown").val())
+    selectedMatrixSection: parseInt($("#githubDropDown").val()),
+    method: "update"
   };
+ }
   let currentStory = validateUserInput(currentUserStory);
 
   if (currentStory === true) {
     //returns true then call api & show userstory on page
     console.log(currentUserStory);
     var progressStyle;
-
-    console.log(typeof currentUserStory.storyProgress);
 
     switch (parseInt(currentUserStory.storyProgress)) {
 
@@ -60,30 +72,55 @@ const postToApi = function() {
          <p>Description: ${currentUserStory.storyDescription.substring(0, 30)}...</p>
     to retrieve and send to database
     */
-    let newStory = `
-    <div id="draggable" data-storyTitle= "${currentUserStory.storyTitle}"  data-toggle="modal" data-target="#otherModal" class="userStory ${progressStyle} ">
-    <p id= "storyHeader">${currentUserStory.storyTitle}</p>
 
-    `;
+    if ( modalType === "create") {
 
 
+      currentUserStory = {
+       storyTitle: $("#userStory").val().trim(),
+       storyDescription: $("#projectDescription").val().trim(),
+       storyProgress: $("#projectStatus").val().trim(),
+       storyDueDate: $(".dueDate").val().trim(),
+       selectedMatrixSection: parseInt($("#githubDropDown").val()),
+       method: "create"
+     };
 
-    switch (currentUserStory.selectedMatrixSection) {
-      case 4:
-        $("#firstQuadrant").append(newStory);
-        break;
-      case 3:
-        $("#secondQuadrant").append(newStory);
-        break;
-      case 2:
-        $("#thirdQuadrant").append(newStory);
-        break;
-      case 1:
-        $("#fourthQuadrant").append(newStory);
-        break;
-      default:
-        console.log("Not all who wander are lost");
+
+      let newStory = `
+      <div data-storyTitle="${currentUserStory.storyTitle}"
+        data-storyDescription="${currentUserStory.storyDescription}"
+        data-storyProgress="${currentUserStory.storyProgress}"
+        data-storyDueDate="${currentUserStory.storyDueDate}"
+        data-selectedMatrixSection="${currentUserStory.selectedMtrixSection}"
+        class="userStory ${progressStyle}">
+      <p id="storyHeader">${currentUserStory.storyTitle}</p>
+
+      `;
+
+      switch (currentUserStory.selectedMatrixSection) {
+        case 4:
+          $("#firstQuadrant").append(newStory);
+          break;
+        case 3:
+          $("#secondQuadrant").append(newStory);
+          break;
+        case 2:
+          $("#thirdQuadrant").append(newStory);
+          break;
+        case 1:
+          $("#fourthQuadrant").append(newStory);
+          break;
+        default:
+          console.log("Not all who wander are lost");
+      }
+    } else if (modalType === "update") {
+
     }
+
+
+
+
+
 
     //make POST request to send to database and handle with controller
     $.post("/userstories", JSON.stringify(currentUserStory), function(data) {
@@ -121,11 +158,10 @@ $(document).ready(function() {
     used for "weighting" of tasks as well as prioritization
     */
 
-    postToApi();
+    postToApi("create");
   });
 
-  $("#userStoryUpdate").click(function() {
-
+  $("#userStoryUpdate").click(function(event) {
 
     /*important tags
     #userStorySubmit - submit button - button clicky thing
@@ -135,8 +171,14 @@ $(document).ready(function() {
     used for "weighting" of tasks as well as prioritization
     */
 
-    postToApi();
+    postToApi("update");
   });
 
+  $(".quadrant").on("click", ".userStory", function(event) {
+    // console.log(event);
+    console.log(this);
+
+    $("#otherModal").modal("show");
+  })
 
 });
