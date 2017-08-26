@@ -25,45 +25,41 @@ const postToApi = function(modalType) {
   let currentUserStory;
   if (modalType === "create") {
     currentUserStory = {
-     storyTitle: $("#userStory").val().trim(),
-     storyDescription: $("#projectDescription").val().trim(),
-     storyProgress: $("#projectStatus").val().trim(),
-     storyDueDate: $("#createDate").val().trim(),
-     selectedMatrixSection: $("#githubDropDown").val(),
-     method: "create"
-   };
-   console.log("TITLE: ", $("#userStory").val(),"description: ", $("#projectDescription").val(),"status: ", $("#projectStatus").val(),"due date: ", $("#createDate").val(),"matrix quadrant: ", parseInt($("#githubDropDown").val()));
- } else if (modalType === "update"){
-   currentUserStory = {
-    storyTitle: $("#userStory").val().trim(),
-    storyDescription: $("#projectDescription").val().trim(),
-    storyProgress: $("#projectStatus").val().trim(),
-    storyDueDate: $(".dueDate").val().trim(),
-    selectedMatrixSection: parseInt($("#githubDropDown").val()),
-    method: "update"
-  };
- }
+      storyTitle: $("#userStory").val().trim(),
+      storyDescription: $("#projectDescription").val().trim(),
+      storyProgress: $("#projectStatus").val().trim(),
+      storyDueDate: $("#createDate").val().trim(),
+      selectedMatrixSection: $("#githubDropDown").val(),
+      method: "create"
+    };
+  } else if (modalType === "update") {
+    currentUserStory = {
+      storyTitle: $("#individUserStoryModal").val().trim(),
+      storyDescription: $("#updateDescription").val().trim(),
+      storyProgress: $("#updateStatus").val().trim(),
+      storyDueDate: $("#updateDate").val().trim(),
+      selectedMatrixSection: $("#updateMatrix").val(),
+      method: "update"
+    };
+  }
+
   let currentStory = validateUserInput(currentUserStory);
 
   if (currentStory === true) {
     //returns true then call api & show userstory on page
-    console.log(currentUserStory);
     var progressStyle;
 
     switch (parseInt(currentUserStory.storyProgress)) {
-
-        case 0:
-           progressStyle = "notStarted";
-          break;
-        case 1:
-           progressStyle = "inProgress";
-          break;
-        case 2:
-           progressStyle = "completed";
-          break;
-
+      case 0:
+        progressStyle = "notStarted";
+        break;
+      case 1:
+        progressStyle = "inProgress";
+        break;
+      case 2:
+        progressStyle = "completed";
+        break;
     }
-
 
     //append information to the page
     /*
@@ -73,30 +69,17 @@ const postToApi = function(modalType) {
     to retrieve and send to database
     */
 
-    if ( modalType === "create") {
-
-
-      currentUserStory = {
-       storyTitle: $("#userStory").val().trim(),
-       storyDescription: $("#projectDescription").val().trim(),
-       storyProgress: $("#projectStatus").val().trim(),
-       storyDueDate: $(".dueDate").val().trim(),
-       selectedMatrixSection: parseInt($("#githubDropDown").val()),
-       method: "create"
-     };
-
-
+    if (modalType === "create") {
       let newStory = `
       <div data-storyTitle="${currentUserStory.storyTitle}"
         data-storyDescription="${currentUserStory.storyDescription}"
         data-storyProgress="${currentUserStory.storyProgress}"
         data-storyDueDate="${currentUserStory.storyDueDate}"
-        data-selectedMatrixSection="${currentUserStory.selectedMtrixSection}"
+        data-selectedMatrixSection="${currentUserStory.selectedMatrixSection}"
         class="userStory ${progressStyle}">
       <p id="storyHeader">${currentUserStory.storyTitle}</p>
 
       `;
-
       switch (currentUserStory.selectedMatrixSection) {
         case 4:
           $("#firstQuadrant").append(newStory);
@@ -114,13 +97,33 @@ const postToApi = function(modalType) {
           console.log("Not all who wander are lost");
       }
     } else if (modalType === "update") {
+      let updateStory = `
+      <div data-storyTitle="${currentUserStory.storyTitle}"
+        data-storyDescription="${currentUserStory.storyDescription}"
+        data-storyProgress="${currentUserStory.storyProgress}"
+        data-storyDueDate="${currentUserStory.storyDueDate}"
+        data-selectedMatrixSection="${currentUserStory.selectedMatrixSection}"
+        class="userStory ${progressStyle}">
+      <p id="storyHeader">${currentUserStory.storyTitle}</p>
 
+      `;
+      switch (currentUserStory.selectedMatrixSection) {
+        case 4:
+          $("#firstQuadrant").append(newStory);
+          break;
+        case 3:
+          $("#secondQuadrant").append(newStory);
+          break;
+        case 2:
+          $("#thirdQuadrant").append(newStory);
+          break;
+        case 1:
+          $("#fourthQuadrant").append(newStory);
+          break;
+        default:
+          console.log("Not all who wander are lost");
+      }
     }
-
-
-
-
-
 
     //make POST request to send to database and handle with controller
     $.post("/userstories", JSON.stringify(currentUserStory), function(data) {
@@ -148,8 +151,6 @@ $(document).ready(function() {
   });
 
   $("#userStorySubmit").click(function() {
-
-
     /*important tags
     #userStorySubmit - submit button - button clicky thing
     #userStory - story title - string
@@ -162,7 +163,6 @@ $(document).ready(function() {
   });
 
   $("#userStoryUpdate").click(function(event) {
-
     /*important tags
     #userStorySubmit - submit button - button clicky thing
     #userStory - story title - string
@@ -175,10 +175,19 @@ $(document).ready(function() {
   });
 
   $(".quadrant").on("click", ".userStory", function(event) {
-    // console.log(event);
+    event.preventDefault();
     console.log(this);
+    let temp = $("#individUserStoryModal")[0];
+    $(temp).text($(this).attr("data-storytitle"));
+    temp = $("#updateDescription")[0];
+    $(temp).text($(this).attr("data-storydescription"));
+    temp = $("#updateStatus")[0];
+    $(temp).val($(this).attr("data-storyprogress"));
+    temp = $("#updateDate")[0];
+    $(temp).val($(this).attr("data-storyduedate"));
+    temp = $("#updateMatrix")[0];
+    $(temp).val($(this).attr("data-selectedmatrixsection"));
 
     $("#otherModal").modal("show");
-  })
-
+  });
 });
