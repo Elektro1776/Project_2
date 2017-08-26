@@ -33,6 +33,7 @@ const postToApi = function(modalType) {
       method: "create"
     };
   } else if (modalType === "update") {
+    // $(div["data-storytitle"=]).remove();
     currentUserStory = {
       storyTitle: $("#individUserStoryModal").val().trim(),
       storyDescription: $("#updateDescription").val().trim(),
@@ -132,12 +133,11 @@ const postToApi = function(modalType) {
         default:
           console.log("Not all who wander are lost");
       }
+      $("#otherModal").modal("hide");
     }
 
     //make POST request to send to database and handle with controller
-    $.post("/userstories", JSON.stringify(currentUserStory), function(data) {
-      console.log("post done man");
-    });
+    $.post("/userstories", JSON.stringify(currentUserStory), function(data) {});
 
     //clear out text boxes incase they want to add multiple user stories
     $("#userStory").val("");
@@ -167,25 +167,17 @@ $(document).ready(function() {
     #githubDropDown - ranked as value of 4 - 1 from top to bottom.... values can be
     used for "weighting" of tasks as well as prioritization
     */
-
+    console.log(this);
     postToApi("create");
   });
 
   $("#userStoryUpdate").click(function(event) {
-    /*important tags
-    #userStorySubmit - submit button - button clicky thing
-    #userStory - story title - string
-    #projectDescription - description - string
-    #githubDropDown - ranked as value of 4 - 1 from top to bottom.... values can be
-    used for "weighting" of tasks as well as prioritization
-    */
-
+    console.log(this.parentElement.children[1].remove());
     postToApi("update");
   });
 
   $(".quadrant").on("click", ".userStory", function(event) {
-    event.preventDefault();
-    console.log(this);
+    this.parentElement.children[2].remove();
     let temp = $("#individUserStoryModal")[0];
     $(temp).text($(this).attr("data-storytitle"));
     temp = $("#updateDescription")[0];
