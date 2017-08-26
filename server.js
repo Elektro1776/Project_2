@@ -12,9 +12,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 const homeRouter = require('./src/controllers/homeController');
 const projectsRouter = require('./src/controllers/projectsController');
-const githubGetRouter = require('./src/api/githubRoutes/githubGet.js');
-const githubCreateRouter = require('./src/api/githubRoutes/githubCreate.js');
-const githubDeleteRouter = require('./src/api/githubRoutes/githubDelete.js');
+const githubGetRoutes = require('./src/api/githubRoutes/githubRoutes.js');
 const userStoriesRouter = require('./src/controllers/userStoriesController');
 const slackRouter = require('./src/apps/slackController');
 const authRouter = require('./src/controllers/authController');
@@ -39,9 +37,7 @@ app.use(userStoriesRouter);
 app.use(projectsRouter);
 app.use(slackRouter);
 app.use(authRouter);
-app.use(githubGetRouter);
-app.use(githubCreateRouter);
-app.use(githubDeleteRouter);
+app.use(githubGetRoutes);
 
 // Test code ofr the snippet features
 app.get('/testcodesnip', (req, res) => {

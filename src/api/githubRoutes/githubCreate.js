@@ -144,7 +144,7 @@ router.post('/api/github/createIssue', (req, res)=>{
     })
   });
 
-  // Fork repo
+  // Fork repo - not working
   router.post('/api/github/fork', (req, res)=>{
     console.log(req.body);
     request({
@@ -163,10 +163,6 @@ router.post('/api/github/createIssue', (req, res)=>{
 
   // Create comment on issue
   router.post('/api/github/createIssueComment', (req, res)=>{
-    let owner  = req.body.owner;
-    let repo = req.body.repo;
-    let number = req.body.number;
-    let access = req.body.token;
     request({
       headers: {
         "Accept": "application/vnd.github.v3.full+json",
@@ -174,8 +170,8 @@ router.post('/api/github/createIssue', (req, res)=>{
       },
       method: 'POST',
       json: true,
-      url: 'https://api.github.com/repos/' + owner + '/' + repo + '/issues/' + number + '/comments?access_token=' + access,
-      body: req.body.body
+      url: 'https://api.github.com/repos/' + req.body.owner + '/' + req.body.repo + '/issues/' + req.body.number + '/comments?access_token=' + req.body.token,
+      body: {body: req.body.body}
     }, (err, response, body) => {
       console.log(' WHAT IS THE BODY?', body);
     })
@@ -183,10 +179,6 @@ router.post('/api/github/createIssue', (req, res)=>{
 
   // Edit an issue
   router.post('/api/github/editIssue', (req, res)=>{
-    let owner  = req.body.owner;
-    let repo = req.body.repo;
-    let number = req.body.number;
-    let access = req.body.token;
     request({
       headers: {
         "Accept": "application/vnd.github.v3.full+json",
@@ -194,27 +186,26 @@ router.post('/api/github/createIssue', (req, res)=>{
       },
       method: 'PATCH',
       json: true,
-      url: 'https://api.github.com/repos/' + owner + '/' + repo + '/issues/' + number + '?access_token=' + access,
-      title: req.body.title,
+      url: 'https://api.github.com/repos/' + req.body.owner + '/' + req.body.repo + '/issues/' + req.body.number + '?access_token=' + req.body.token,
+      body: {title: req.body.title,
       body: req.body.body,
-      assignees: req.body.assignees
+      assignees: req.body.assignees}
     }, (err, response, body) => {
       console.log(' WHAT IS THE BODY?', body);
     })
   });
 
-  // Render markdown
+  // Render markdown - not working
   router.post('/api/github/markdown', (req, res)=>{
-    let access = req.body.token;
     request({
       headers: {
         "Accept": "application/vnd.github.v3.full+json",
         "User-Agent": "request"
       },
       method: 'POST',
-      json: true,
+      'content_type': "text/plain",
       url: 'https://api.github.com/markdown/raw',
-      body: req.body.body
+      body: JSON.stringify(req.body)
     }, (err, response, body) => {
       console.log(' WHAT IS THE BODY?', body);
     })
@@ -222,10 +213,6 @@ router.post('/api/github/createIssue', (req, res)=>{
 
   // Update a file - need to figure out why SHA number not working
   router.post('/api/github/updateFile', (req, res)=>{
-    let owner  = req.body.owner;
-    let repo = req.body.repo;
-    let path = req.body.path;
-    let access = req.body.token;
     request({
       headers: {
         "Accept": "application/vnd.github.v3.full+json",
@@ -233,10 +220,10 @@ router.post('/api/github/createIssue', (req, res)=>{
       },
       method: 'PUT',
       json: true,
-      url: 'https://api.github.com/repos/' + owner + '/' + repo + '/contents/' + path + '?access_token=' + access,
-      message: req.body.message,
+      url: 'https://api.github.com/repos/' + req.body.owner + '/' + req.body.repo + '/contents/' + req.body.path + '?access_token=' + req.body.token,
+      body: {message: req.body.message,
       content: req.body.content,
-      sha: req.body.sha
+      sha: req.body.sha}
     }, (err, response, body) => {
       console.log(' WHAT IS THE BODY?', body);
     })

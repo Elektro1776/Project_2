@@ -5,8 +5,7 @@ const request = require("request");
 
 // Get repos for a user
  router.post('/api/github/getRepos', (req, res)=>{
-   let id  = req.body.id;
-   console.log(req.body);
+  //  console.log(req.body);
    request({
      headers: {
        "Accept": "application/vnd.github.v3.full+json",
@@ -14,7 +13,7 @@ const request = require("request");
      },
      method: 'GET',
      json: true,
-     url: 'https://api.github.com/users/' + id + '/repos'
+     url: 'https://api.github.com/users/' + req.body.id + '/repos'
    }, (err, response, body) => {
      console.log(' WHAT IS THE BODY?', body);
    })
@@ -22,9 +21,7 @@ const request = require("request");
 
  // Get issues
  router.post('/api/github/getIssues', (req, res)=>{
-   let owner  = req.body.owner;
-   let repo  = req.body.repo;
-   console.log(req.body);
+  //  console.log(req.body);
    request({
      headers: {
        "Accept": "application/vnd.github.v3.full+json",
@@ -32,7 +29,7 @@ const request = require("request");
      },
      method: 'GET',
      json: true,
-     url: 'https://api.github.com/repos/' + owner + '/' + repo + '/issues'
+     url: 'https://api.github.com/repos/' + req.body.owner + '/' + req.body.repo + '/issues'
    }, (err, response, body) => {
      console.log(' WHAT IS THE BODY?', body);
    })
@@ -40,10 +37,7 @@ const request = require("request");
 
  // Get comments from a specific issue
  router.post('/api/github/getIssueComments', (req, res)=>{
-   let owner  = req.body.owner;
-   let repo  = req.body.repo;
-   let number  = req.body.number;
-   console.log(req.body);
+  //  console.log(req.body);
    request({
      headers: {
        "Accept": "application/vnd.github.v3.full+json",
@@ -51,7 +45,7 @@ const request = require("request");
      },
      method: 'GET',
      json: true,
-     url: 'https://api.github.com/repos/' + owner + '/' + repo + '/issues/' + number + '/comments'
+     url: 'https://api.github.com/repos/' + req.body.owner + '/' + req.body.repo + '/issues/' + req.body.number + '/comments'
    }, (err, response, body) => {
      console.log(' WHAT IS THE BODY?', body);
    })
@@ -59,10 +53,7 @@ const request = require("request");
 
  // Get Collaborators
  router.post('/api/github/getCollaborators', (req, res)=>{
-   let owner  = req.body.owner;
-   let repo  = req.body.repo;
-   let access = req.body.token;
-   console.log(req.body);
+  //  console.log(req.body);
    request({
      headers: {
        "Accept": "application/vnd.github.v3.full+json",
@@ -70,7 +61,7 @@ const request = require("request");
      },
      method: 'GET',
      json: true,
-     url: 'https://api.github.com/repos/' + owner + '/' + repo + '/collaborators?access_token=' + access
+     url: 'https://api.github.com/repos/' + req.body.owner + '/' + req.body.repo + '/collaborators?access_token=' + req.body.token
    }, (err, response, body) => {
      console.log(' WHAT IS THE BODY?', body);
    })
@@ -78,10 +69,7 @@ const request = require("request");
 
  // Get a branch
  router.post('/api/github/getBranch', (req, res)=>{
-   let owner  = req.body.owner;
-   let repo  = req.body.repo;
-   let branch = req.body.branch;
-   console.log(req.body);
+  //  console.log(req.body);
    request({
      headers: {
        "Accept": "application/vnd.github.v3.full+json",
@@ -89,7 +77,7 @@ const request = require("request");
      },
      method: 'GET',
      json: true,
-     url: 'https://api.github.com/repos/' + owner + '/' + repo + '/branches/' + branch
+     url: 'https://api.github.com/repos/' + req.body.owner + '/' + req.body.repo + '/branches/' + req.body.branch
    }, (err, response, body) => {
      console.log(' WHAT IS THE BODY?', body);
    })
@@ -97,9 +85,7 @@ const request = require("request");
 
  // Get all pull requests
  router.post('/api/github/getPulls', (req, res)=>{
-   let owner  = req.body.owner;
-   let repo  = req.body.repo;
-   console.log(req.body);
+  //  console.log(req.body);
    request({
      headers: {
        "Accept": "application/vnd.github.v3.full+json",
@@ -107,7 +93,7 @@ const request = require("request");
      },
      method: 'GET',
      json: true,
-     url: 'https://api.github.com/repos/' + owner + '/' + repo + '/pulls'
+     url: 'https://api.github.com/repos/' + req.body.owner + '/' + req.body.repo + '/pulls'
    }, (err, response, body) => {
      console.log(' WHAT IS THE BODY?', body);
    })

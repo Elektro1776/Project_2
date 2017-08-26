@@ -5,10 +5,6 @@ const request = require("request");
 
  // Remove a Collaborator
  router.post('/api/github/removeCollaborator', (req, res)=>{
-   let owner  = req.body.owner;
-   let repo = req.body.repo;
-   let username = req.body.username;
-   let access = req.body.token;
    request({
      headers: {
        "Accept": "application/vnd.github.v3.full+json",
@@ -16,7 +12,7 @@ const request = require("request");
      },
      method: 'DELETE',
      json: true,
-     url: 'https://api.github.com/repos/' + owner + '/' + repo + '/collaborators/' + username + '?access_token=' + access
+     url: 'https://api.github.com/repos/' + req.body.owner + '/' + req.body.repo + '/collaborators/' + req.body.username + '?access_token=' + req.body.token
    }, (err, response, body) => {
      console.log(' WHAT IS THE BODY?', body);
    })
@@ -24,10 +20,6 @@ const request = require("request");
 
  // Delete the file
 router.post('/api/github/deleteFile', (req, res)=>{
-  let owner  = req.body.owner;
-  let repo = req.body.repo;
-  let path = req.body.path;
-  let access = req.body.token;
   request({
     headers: {
       "Accept": "application/vnd.github.v3.full+json",
@@ -35,7 +27,7 @@ router.post('/api/github/deleteFile', (req, res)=>{
     },
     method: 'DELETE',
     json: true,
-    url: 'https://api.github.com/repos/' + owner + '/' + repo + '/contents/' + path + '?access_token=' + access
+    url: 'https://api.github.com/repos/' + req.body.owner + '/' + req.body.repo + '/contents/' + req.body.path + '?access_token=' + req.body.token
   }, (err, response, body) => {
     console.log(' WHAT IS THE BODY?', body);
   })
