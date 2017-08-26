@@ -70,6 +70,15 @@ const postToApi = function(modalType) {
     */
 
     if (modalType === "create") {
+      currentUserStory = {
+        storyTitle: $("#userStory").val().trim(),
+        storyDescription: $("#projectDescription").val().trim(),
+        storyProgress: $("#projectStatus").val().trim(),
+        storyDueDate: $("#createDate").val().trim(),
+        selectedMatrixSection: $("#githubDropDown").val(),
+        method: "create"
+      };
+
       let newStory = `
       <div data-storyTitle="${currentUserStory.storyTitle}"
         data-storyDescription="${currentUserStory.storyDescription}"
@@ -81,16 +90,16 @@ const postToApi = function(modalType) {
 
       `;
       switch (currentUserStory.selectedMatrixSection) {
-        case 4:
+        case "4":
           $("#firstQuadrant").append(newStory);
           break;
-        case 3:
+        case "3":
           $("#secondQuadrant").append(newStory);
           break;
-        case 2:
+        case "2":
           $("#thirdQuadrant").append(newStory);
           break;
-        case 1:
+        case "1":
           $("#fourthQuadrant").append(newStory);
           break;
         default:
@@ -108,17 +117,17 @@ const postToApi = function(modalType) {
 
       `;
       switch (currentUserStory.selectedMatrixSection) {
-        case 4:
-          $("#firstQuadrant").append(newStory);
+        case "4":
+          $("#firstQuadrant").append(updateStory);
           break;
-        case 3:
-          $("#secondQuadrant").append(newStory);
+        case "3":
+          $("#secondQuadrant").append(updateStory);
           break;
-        case 2:
-          $("#thirdQuadrant").append(newStory);
+        case "2":
+          $("#thirdQuadrant").append(updateStory);
           break;
-        case 1:
-          $("#fourthQuadrant").append(newStory);
+        case "1":
+          $("#fourthQuadrant").append(updateStory);
           break;
         default:
           console.log("Not all who wander are lost");
