@@ -58,5 +58,14 @@ $('.projectButton').click(function(e) {
     window.location.href = '/userstories'
     console.log(projectId,' WENT SOME WHERE???');
   })
+
+
+
+
 })
+// $( init );
+
+// $(function init() {
+//   $('.draggable').draggable();
+// })
 });
