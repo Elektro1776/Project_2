@@ -27,6 +27,21 @@ pause: true,
 interval: false
 });
 
+
+
+$(function(){
+
+  $('[data-toggle="popover"]').popover({
+      trigger:'click',
+      animation: true,
+      placement: 'left',
+      html: true,
+      container: "body"
+    });
+
+});
+
+
 // for the modal
 
 $('#myModal').on('shown.bs.modal', function () {
@@ -35,15 +50,7 @@ $('#myModal').on('shown.bs.modal', function () {
 
 // for the popover search
 
-$('#popover').popover({
-    html : true,
-    title: function() {
-      return $("#popover-head").html();
-    },
-    content: function() {
-      return $("#popover-content").html();
-    }
-});
+
 // create click handler to send ajax GET request with the id from the button in
 // the body of the ajax request. On the userStoriesController log out what the
 // req.body is an you should see the id of the project that was clicked

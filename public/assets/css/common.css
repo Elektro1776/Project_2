@@ -198,6 +198,11 @@ margin-top: 5px;
   padding-top: 15px;
 }
 
+.popStyle{
+
+  float: right;
+}
+
 
 .carousel-inner>.item>a>img, .carousel-inner>.item>img {
   line-height: 1;

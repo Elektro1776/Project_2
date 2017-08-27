@@ -14,7 +14,40 @@
       </div>
       <div id="collapse{{id}}" class="panel-collapse collapse">
         <br>
-        <p> {{ description }} </p>
+        <p>Description: {{ description }} </p>
+        <p> Issues: {{ issues }}</p>
+        <p> {{ body }} </p>
+        <p> {{ assignees }} </p>
+        <p>Owner: {{ owner.login }}</p>
+        <form class="projectInfo">
+          <input type='' class='form-control input-lg' placeholder='Add Collaborator' >
+          <button type='submit' class='btn btn-lg btn-default '>Add Collaborator</button>
+
+        </form>
+        <form class="projectInfo">
+          <input type='' class='form-control input-lg' placeholder='Add Collaborator' >
+          <button type='submit' class='btn btn-lg btn-default '>Create PR</button>
+
+        </form>
+        <form class="projectInfo">
+          <input type='' class='form-control input-lg' placeholder='Add Collaborator' >
+          <button type='submit' class='btn btn-lg btn-default '>Create Issue</button>
+
+        </form>
+        <form class="projectInfo">
+          <input type='' class='form-control input-lg' placeholder='Add Collaborator' >
+          <button type='submit' class='btn btn-lg btn-default '>Assign Issues</button>
+
+        </form>
+
+        <button type="button" class="btn btn-success popStyle" data-toggle="popover" data-content="jazz">Add collaborator</button>
+        <div id="popover" class="hide">
+          <form>
+            <input></input>
+            <button type="submitCollab" class="btn btn-info">Submit</button>
+          </form>
+        </div>
+
       </div>
     </div>
   </div>
