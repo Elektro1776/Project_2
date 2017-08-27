@@ -107,7 +107,6 @@ const updateUserStory = function(currentStory) {
       .attr("data-storyduedate", $("#updateDate").val().trim())
       .attr("data-selectedmatrixsection", $("#updateMatrix").val());
 
-    console.log(currentStory);
     switch ($(currentStory).attr("data-selectedmatrixsection")) {
       case "4":
         $("#firstQuadrant").append(currentStory);
@@ -144,7 +143,7 @@ $(document).ready(function() {
     #githubDropDown - ranked as value of 4 - 1 from top to bottom.... values can be
     used for "weighting" of tasks as well as prioritization
     */
-    postToApi("create");
+    postToApi();
   });
 
   $(".quadrant").on("click", ".userStory", function(event) {
