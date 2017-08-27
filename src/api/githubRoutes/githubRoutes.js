@@ -3,6 +3,20 @@ const request = require("request");
 const router = express.Router();
 
 // Get repos for a user
+ // router.post('/api/github/getRepos', (req, res)=>{
+ //  //  console.log(req.body);
+ //   request({
+ //     headers: {
+ //       "Accept": "application/vnd.github.v3.full+json",
+ //       "User-Agent": "request"
+ //     },
+ //     method: 'GET',
+ //     json: true,
+ //     url: 'https://api.github.com/users/' + req.body.id + '/repos'
+ //   }, (err, response, body) => {
+ //     console.log(' WHAT IS THE BODY?', body);
+ //   })
+ //     });
  router.post('/api/github/getRepos', (req, res)=>{
   //  console.log(req.body);
    request({
@@ -12,7 +26,10 @@ const router = express.Router();
      },
      method: 'GET',
      json: true,
-     url: 'https://api.github.com/users/' + req.body.id + '/repos'
+     url: 'https://api.github.com/user/repos?access_token=' + req.body.token,
+     body: {page: req.body.page,
+     per_page: req.body.per_page,
+   sort: "created"}
    }, (err, response, body) => {
      console.log(' WHAT IS THE BODY?', body);
    })
