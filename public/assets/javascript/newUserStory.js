@@ -35,19 +35,6 @@ const postToApi = function() {
 
   if (currentStory === true) {
     //returns true then call api & show userstory on page
-    var progressStyle;
-
-    switch (parseInt(currentUserStory.storyProgress)) {
-      case 0:
-        progressStyle = "notStarted";
-        break;
-      case 1:
-        progressStyle = "inProgress";
-        break;
-      case 2:
-        progressStyle = "completed";
-        break;
-    }
 
     //append information to the page
     /*
@@ -65,14 +52,14 @@ const postToApi = function() {
       selectedMatrixSection: $("#githubDropDown").val(),
       method: "create"
     };
-    console.log(currentUserStory);
+
     let newStory = `
       <div data-storyTitle="${currentUserStory.storyTitle}"
         data-storyDescription="${currentUserStory.storyDescription}"
         data-storyProgress="${currentUserStory.storyProgress}"
         data-storyDueDate="${currentUserStory.storyDueDate}"
         data-selectedMatrixSection="${currentUserStory.selectedMatrixSection}"
-        class="userStory ${progressStyle}">
+        class="userStory ${currentUserStory.storyProgress}">
       <p>${currentUserStory.storyTitle}</p></div>
 
       `;
@@ -112,12 +99,11 @@ const postToApi = function() {
 const updateUserStory = function(currentStory) {
   $("#individUserStoryModal").text($(currentStory).attr("data-storytitle"));
   $("#userStoryUpdate").click(function(event) {
-    $(currentStory).attr(
-      "data-storydescription",
-      $("#updateDescription").val().trim()
-    );
     $(currentStory)
+      .attr("data-storydescription", $("#updateDescription").val().trim())
+      .removeClass($(currentStory).attr("data-storyprogress"))
       .attr("data-storyprogress", $("#updateStatus").val().trim())
+      .addClass($(currentStory).attr("data-storyprogress"))
       .attr("data-storyduedate", $("#updateDate").val().trim())
       .attr("data-selectedmatrixsection", $("#updateMatrix").val());
 
