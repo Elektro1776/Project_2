@@ -2698,8 +2698,9 @@ router.get('/projects', (req, res) => {
     },
     method: 'GET',
     json: true,
-    url: 'https://api.github.com/users/Elektro1776/repos'
+    url: 'https://api.github.com/user/repos?access_token=cf9f12bb356d61b4d22bc716df8c9330d38855b1&per_page=5&sort=created&direction=descpage=1',
   }, (err, response, projects) => {
+    // console.log(projects, " projects");
     // request({
     //   headers: {
     //     "Accept": "application/vnd.github.v3.full+json",
@@ -2711,6 +2712,9 @@ router.get('/projects', (req, res) => {
     // }, (err, response, issues) => {
     //   console.log(' WHAT IS THE BODY?', issues);
     // })
+    let beginningLink = response.headers.link;
+    console.log(beginningLink);
+    // console.log(response.headers.link, " headers/link")
     res.render('projects', { title: 'uTile', projects });
   })
 });

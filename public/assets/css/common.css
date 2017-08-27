@@ -1,6 +1,9 @@
 html, body {
   height: 100%;
 }
+.reSizer {
+  font-size: 45px;
+}
 body {
   display: flex;
   flex-direction: column;

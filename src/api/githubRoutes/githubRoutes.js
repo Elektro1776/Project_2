@@ -26,10 +26,7 @@ const router = express.Router();
      },
      method: 'GET',
      json: true,
-     url: 'https://api.github.com/user/repos?access_token=' + req.body.token,
-     body: {page: req.body.page,
-     per_page: req.body.per_page,
-   sort: "created"}
+     url: req.body.url
    }, (err, response, body) => {
      console.log(' WHAT IS THE BODY?', body);
    })
