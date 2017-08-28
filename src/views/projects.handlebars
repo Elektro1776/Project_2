@@ -2,6 +2,25 @@
 
 
   <div class= "row">
+
+
+
+    <form class="" action="/Projects" method="POST">
+      <input type="hidden" name="urlBackward" value='{{pages.pageBackward}}'
+ id="inputField">
+ <button type="submit" class="btn btn-primary">
+  <span class="glyphicon glyphicon-menu-left reSizer" id="goBack"></span>
+</button>
+    </form>
+    <form class="" action="/Projects" method="POST">
+      <input type="hidden" name="urlForward" value='{{pages.pageForward}}'
+ id="inputField">
+ <button type="submit" class="btn btn-primary">
+  <span class="glyphicon glyphicon-menu-right reSizer" id="goForward"></span>
+</button>
+    </form>
+
+    <br/><br/>
     <div class= "col-sm-12 col-md-6 col-lg-6">
       {{#each projects}}
   <div class="panel-group">
@@ -53,7 +72,8 @@
   </div>
   {{/each}}
 </div>
-</div
+
+</div>
 
 
 

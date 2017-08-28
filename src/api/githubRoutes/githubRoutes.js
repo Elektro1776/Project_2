@@ -1,22 +1,59 @@
 const express = require('express');
 const request = require("request");
 const router = express.Router();
-
+var github = require("../../auth/ghkey.js");
 // Get repos for a user
- router.post('/api/github/getRepos', (req, res)=>{
-  //  console.log(req.body);
-   request({
-     headers: {
-       "Accept": "application/vnd.github.v3.full+json",
-       "User-Agent": "request"
-     },
-     method: 'GET',
-     json: true,
-     url: 'https://api.github.com/users/' + req.body.id + '/repos'
-   }, (err, response, body) => {
-     console.log(' WHAT IS THE BODY?', body);
-   })
-     });
+
+ // router.post('/api/github/getRepos', (req, res)=>{
+ //   console.log(req.body);
+ //  let pageNumber;
+ //   if (req.body.urlForward) {
+ //     pageNumber = req.body.urlForward;
+ //
+ //   }
+ //   else if (req.body.urlBackward) {
+ //     pageNumber = req.body.urlBackward;
+ //   }
+ //   else {
+ //     pageNumber = 1;
+ //     console.log("I really hope this never falls to this.");
+ //   }
+ //  console.log(pageNumber, " page number");
+ //   request({
+ //     headers: {
+ //       "Accept": "application/vnd.github.v3.full+json",
+ //       "User-Agent": "request"
+ //     },
+ //     method: 'GET',
+ //     json: true,
+ //     url: 'https://api.github.com/user/repos?access_token=' + github.token + '&per_page=5&sort=created&direction=desc&page=' + pageNumber,
+ //   }, (err, response, projects) => {
+ //     let forwardLink = response.headers.link;
+ //     let pages = {};
+ //     const pullString = function(stringToCheck) {
+ //       const myRegex = /(http[^>]*)/g;
+ //       let links = [];
+ //       let match = myRegex.exec(stringToCheck);
+ //       while (match != null) {
+ //         // console.log(match[0]);
+ //         links.push(match[0]);
+ //         //redefine match
+ //         match = myRegex.exec(stringToCheck);
+ //       }
+ //       pages.pageBackwardLink = links[1];
+ //       pages.pageForwardLink = links[0];
+ //     };
+ //
+ //     pullString(forwardLink);
+ //     var pageForward = pages.pageForwardLink.slice(pages.pageForwardLink.length-1);
+ //     var pageBackward = pages.pageBackwardLink.slice(pages.pageBackwardLink.length-1);
+ //     pages = {"pageForward": pageForward, "pageBackward": pageBackward};
+ //    //  console.log(pages);
+ //
+ //
+ //     res.render('projects', { title: 'uTile', projects, pages});
+ //   })
+ //     });
 
  // Get issues
  router.post('/api/github/getIssues', (req, res)=>{
