@@ -38,23 +38,34 @@
         <p> {{ body }} </p>
         <p> {{ assignees }} </p>
         <p>Owner: {{ owner.login }}</p>
-        <form class="projectInfo">
-          <input type='' class='form-control input-lg' placeholder='Add Collaborator' >
+        <form class="projectInfo" action='/api/github/addCollaborator' method='POST'>
+          <input type='' class='form-control input-lg' name='username' placeholder='Add Collaborator' >
+          <input type="hidden" name="owner" value='{{owner.login}}'>
+          <input type="hidden" name="repo" value='{{name}}'>
           <button type='submit' class='btn btn-lg btn-default '>Add Collaborator</button>
 
         </form>
-        <form class="projectInfo">
-          <input type='' class='form-control input-lg' placeholder='Add Collaborator' >
+        <form class="projectInfo" action='/api/github/createPullRequest' method='POST'>
+          <input type='' class='form-control input-lg' name='title' placeholder='Create PR' >
+          <input type="hidden" name="owner" value='{{owner.login}}'>
+          <input type="hidden" name="repo" value='{{name}}'>
           <button type='submit' class='btn btn-lg btn-default '>Create PR</button>
 
         </form>
-        <form class="projectInfo">
-          <input type='' class='form-control input-lg' placeholder='Add Collaborator' >
+        <form class="projectInfo" action='/api/github/createIssue' method='POST'>
+          <input type='' class='form-control input-lg' name="title" placeholder='Create Issue' >
+          <input type="hidden" name="owner" value="{{owner.login}}">
+          <input type="hidden" name="repo" value="{{name}}">
+          <input type="hidden" name="body" value="optional">
+          <input type="hidden" name="assignees" value="901david">
           <button type='submit' class='btn btn-lg btn-default '>Create Issue</button>
 
         </form>
-        <form class="projectInfo">
-          <input type='' class='form-control input-lg' placeholder='Add Collaborator' >
+        <form class="projectInfo" action='/api/github/addAssignees' method='POST'>
+          <input type='' class='form-control input-lg' name='assignees' placeholder='Assign Issues' >
+          <input type="hidden" name="owner" value='{{owner.login}}'>
+          <input type="hidden" name="repo" value='{{name}}'>
+          <input type="hidden" name="number" value='26'>
           <button type='submit' class='btn btn-lg btn-default '>Assign Issues</button>
 
         </form>
