@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const request = require('request');
 var github = require("../auth/ghkey.js");
+var parse = require('parse-link-header');
 
 
 router.get('/projects', (req, res) => {
@@ -27,31 +28,30 @@ router.get('/projects', (req, res) => {
     // }, (err, response, issues) => {
     //   console.log(' WHAT IS THE BODY?', issues);
     // })
-    let forwardLink = response.headers.link;
-    let pages = {};
-    const pullString = function(stringToCheck) {
-      const myRegex = /(http[^>]*)/g;
-      let links = [];
-      let match = myRegex.exec(stringToCheck);
-      while (match != null) {
-        // console.log(match[0]);
-        links.push(match[0]);
-        //redefine match
-        match = myRegex.exec(stringToCheck);
-      }
-      pages.pageBackwardLink = links[1];
-      pages.pageForwardLink = links[0];
-    };
+    let linkHeader = response.headers.link;
+    var parsed = parse(linkHeader);
+    // console.log(parsed);
 
-    pullString(forwardLink);
-    var pageForward = pages.pageForwardLink.slice(pages.pageForwardLink.length-1);
-    var pageBackward = pages.pageBackwardLink.slice(pages.pageBackwardLink.length-1);
-    pages = {"pageForward": pageForward, "pageBackward": pageBackward};
-    console.log(pages);
+    let nextPage;
+    let prevPage;
+    let start;
+    let end;
+    if (parsed.first === undefined && parsed.prev === undefined) {
+      nextPage = parsed.next.url.slice(parsed.next.url.length -1);
+      prevPage = parsed.last.url.slice(parsed.last.url.length -1);
+    }
+    else if (parsed.next === undefined && parsed.last === undefined) {
+      nextPage = parsed.first.url.slice(parsed.first.url.length -1);
+      prevPage = parsed.prev.url.slice(parsed.prev.url.length -1);
+    }
+    else {
+      nextPage = parsed.next.url.slice(parsed.next.url.length -1);
+      prevPage = parsed.prev.url.slice(parsed.prev.url.length -1);
+    }
 
-
+    let pages = {"pageForward": nextPage, "pageBackward": prevPage};
+    console.log(pages)
     res.render('projects', { title: 'uTile', projects, pages});
-    // console.log(projects);
   })
 });
 router.post('/projects', (req, res) => {
@@ -88,32 +88,30 @@ router.post('/projects', (req, res) => {
     // }, (err, response, issues) => {
     //   console.log(' WHAT IS THE BODY?', issues);
     // })
-    console.log(response.headers.link);
-    let forwardLink = response.headers.link;
-    let pages = {};
-    const pullString = function(stringToCheck) {
-      const myRegex = /(http[^>]*)/g;
-      let links = [];
-      let match = myRegex.exec(stringToCheck);
-      while (match != null) {
-        // console.log(match[0]);
-        links.push(match[0]);
-        //redefine match
-        match = myRegex.exec(stringToCheck);
-      }
-      pages.pageBackwardLink = links[1];
-      pages.pageForwardLink = links[0];
-    };
+    let linkHeader = response.headers.link;
+    var parsed = parse(linkHeader);
+    // console.log(parsed);
 
-    pullString(forwardLink);
-    var pageForward = pages.pageForwardLink.slice(pages.pageForwardLink.length-1);
-    var pageBackward = pages.pageBackwardLink.slice(pages.pageBackwardLink.length-1);
-    pages = {"pageForward": pageForward, "pageBackward": pageBackward};
-    console.log(pages);
+    let nextPage;
+    let prevPage;
+    let start;
+    let end;
+    if (parsed.first === undefined && parsed.prev === undefined) {
+      nextPage = parsed.next.url.slice(parsed.next.url.length -1);
+      prevPage = parsed.last.url.slice(parsed.last.url.length -1);
+    }
+    else if (parsed.next === undefined && parsed.last === undefined) {
+      nextPage = parsed.first.url.slice(parsed.first.url.length -1);
+      prevPage = parsed.prev.url.slice(parsed.prev.url.length -1);
+    }
+    else {
+      nextPage = parsed.next.url.slice(parsed.next.url.length -1);
+      prevPage = parsed.prev.url.slice(parsed.prev.url.length -1);
+    }
 
-
+    let pages = {"pageForward": nextPage, "pageBackward": prevPage};
+    console.log(pages)
     res.render('projects', { title: 'uTile', projects, pages});
-    // console.log(projects);
   })
 });
 
