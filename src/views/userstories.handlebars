@@ -1,7 +1,6 @@
 <!-- Matrix  Structure -->
+
 <style>
-
-
   .sideHeader,
   .quadrant {
     background: #a0a0a0;
@@ -9,11 +8,11 @@
     border: 2px black solid;
   }
 
-  .sideHeader{
+  .sideHeader {
     height: 200px;
     width: 60px;
-
   }
+
   .quadrant {
     overflow-y: auto;
     height: 200px;
@@ -41,7 +40,7 @@
     margin: 0 5px 0 10px;
   }
 
-  .empty{
+  .empty {
     width: 60px;
   }
 
@@ -53,7 +52,6 @@
     padding: 5px 0px 5px 5px;
     margin-bottom: 10px;
     text-align: left;
-
   }
 
   p {
@@ -64,33 +62,30 @@
     font-weight: 500;
     font-size: 12px;
   }
-
 </style>
 
-<div class= "container">
-<div class="row">
-  <div class="col-xs-2 col-sm-2 empty"></div>
-    <div class="col-xs-5 col-sm-5 top">high importance</div>
-    <div class="col-xs-5 col-sm-5 top">low importance</div>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-2 col-sm-2 empty"></div>
+    <div class="col-xs-5 col-sm-5 top">High importance</div>
+    <div class="col-xs-5 col-sm-5 top">Low importance</div>
   </div>
   <div class="row">
     <div class="col-xs-2 col-sm-2 sideHeader">
-      <p class="vertical-text">high value</p>
+      <p class="vertical-text">High value</p>
     </div>
     <div class="text-center">
-
-      {{!-- The do and decide and other tags are not necessary to final finish --}}
-      <div id="firstQuadrant" class="col-xs-5 col-sm-5 quadrant">Do</div>
-      <div id="secondQuadrant" class="col-xs-5 col-sm-5 quadrant">Decide</div>
+      <div id="firstQuadrant" class="col-xs-5 col-sm-5 quadrant"></div>
+      <div id="secondQuadrant" class="col-xs-5 col-sm-5 quadrant"></div>
     </div>
   </div>
   <div class="row">
     <div class="col-xs-2 col-sm-2 sideHeader">
-      <p class="vertical-text">low value</p>
+      <p class="vertical-text">Low value</p>
     </div>
     <div class="text-center">
-      <div id="thirdQuadrant" class="col-xs-5 col-sm-5 quadrant">Delegate</div>
-      <div id="fourthQuadrant" class="col-xs-5 col-sm-5 quadrant">Delete</div>
+      <div id="thirdQuadrant" class="col-xs-5 col-sm-5 quadrant"></div>
+      <div id="fourthQuadrant" class="col-xs-5 col-sm-5 quadrant"></div>
     </div>
   </div>
 </div>
@@ -109,7 +104,7 @@
       </div>
       <div class="modal-body">
 
-        <form id= "soloForm">
+        <form id="soloForm">
           <div class="form-group">
             <label for="projectName"> </label>
           </div>
@@ -122,9 +117,9 @@
           <div class="form-group">
             <label for="projectStatus">Status</label>
             <select class="form-control" id="updateStatus">
-              <option value="0">Not started</option>
-              <option value="1">In progress</option>
-              <option value="2">Completed</option>
+              <option value="notStarted">Not started</option>
+              <option value="inProgress">In progress</option>
+              <option value="completed">Completed</option>
             </select>
           </div>
 
@@ -184,9 +179,9 @@
           <div class="form-group">
             <label for="projectStatus">Status</label>
             <select class="form-control" id="projectStatus">
-              <option value="0">Not started</option>
-              <option value="1">In progress</option>
-              <option value="2">Completed</option>
+              <option value="notStarted">Not started</option>
+              <option value="inProgress">In progress</option>
+              <option value="completed">Completed</option>
             </select>
           </div>
 
