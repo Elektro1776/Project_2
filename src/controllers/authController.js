@@ -21,7 +21,12 @@ router.get('/login', (req, res) => {
 // })
 //Github authentification routes
 router.get('/auth/github',
-  GitHubStrategy.authenticate('github', { scope: [ 'user:vdavidhamond@gmail.com' ] }));
+  GitHubStrategy.authenticate('github', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  }
+);
 
 router.get('/auth/github/callback',
   GitHubStrategy.authenticate('github', { failureRedirect: '/login' }),
