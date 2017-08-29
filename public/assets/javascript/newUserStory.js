@@ -52,7 +52,7 @@ const postToApi = function() {
       selectedMatrixSection: $("#githubDropDown").val(),
       method: "create"
     };
-
+    console.log(currentUserStory);
     let newStory = `
       <div data-storyTitle="${currentUserStory.storyTitle}"
         data-storyDescription="${currentUserStory.storyDescription}"
@@ -63,6 +63,7 @@ const postToApi = function() {
       <p>${currentUserStory.storyTitle}</p></div>
 
       `;
+    console.log(newStory);
     switch (currentUserStory.selectedMatrixSection) {
       case "4":
         $("#firstQuadrant").append(newStory);
@@ -98,7 +99,18 @@ const postToApi = function() {
 
 const updateUserStory = function(currentStory) {
   $("#individUserStoryModal").text($(currentStory).attr("data-storytitle"));
+  $("#updateDescription").text($(currentStory).attr("data-storydescription"));
+  $("#updateStatus").val($(currentStory).attr("data-storyProgress"));
+  $("#updateDate").val($(currentStory).attr("data-storyDueDate"));
+  $("#updateMatrix").val($(currentStory).attr("data-selectedmatrixsection"));
+  $("#closeOtherModal").click(function(event) {
+    currentStory = null;
+    $("#userStoryUpdate").off("click");
+    $("#otherModal").modal("hide");
+  });
+
   $("#userStoryUpdate").click(function(event) {
+    $("#userStoryUpdate").off("click");
     $(currentStory)
       .attr("data-storydescription", $("#updateDescription").val().trim())
       .removeClass($(currentStory).attr("data-storyprogress"))
@@ -106,6 +118,8 @@ const updateUserStory = function(currentStory) {
       .addClass($(currentStory).attr("data-storyprogress"))
       .attr("data-storyduedate", $("#updateDate").val().trim())
       .attr("data-selectedmatrixsection", $("#updateMatrix").val());
+
+    console.log(currentStory);
 
     switch ($(currentStory).attr("data-selectedmatrixsection")) {
       case "4":
@@ -148,8 +162,9 @@ $(document).ready(function() {
 
   $(".quadrant").on("click", ".userStory", function(event) {
     console.log(this);
-    let currentStory = this;
-    updateUserStory(currentStory);
+    let thisStory = null;
+    thisStory = this;
+    updateUserStory(thisStory);
     $("#otherModal").modal("show");
   });
 });
