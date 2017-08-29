@@ -4,13 +4,26 @@ const knex = require('knex')(require('./db_config.js'))
 
 
 module.exports = {
-  createUser({utile_username,github_federation_id,initial_federation}) {
+  createUser(profile) {
     // console.log(id,username,authProvider)
-     return knex('Authentication').insert({
-       utile_username,
-       github_federation_id,
-       initial_federation
-     })
+    const { id, username, email, provider } = profile;
+    console.log(' WHAT IS OUR ID?', id);
+    return knex('Authentication').where({
+      github_federation_id: id,
+    }).then(user => {
+      if (user.length === 0) {
+        console.log(' THERE IS NO USER', user);
+        return knex('Authentication').insert({
+          utile_username: username,
+          github_federation_id: id,
+          initial_federation: provider
+        })
+      } else {
+        console.log(' WE HAVE A USER', user);
+        return
+      }
+    })
+
 
   },
   getProject(id) {

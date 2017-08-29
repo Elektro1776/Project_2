@@ -26,7 +26,9 @@ router.get('/auth/github',
 router.get('/auth/github/callback',
   GitHubStrategy.authenticate('github', { failureRedirect: '/login' }),
   function(req, res) {
+    console.log("This is the authenticated user", req.user);
     // Successful authentication, redirect home.
+    // req.login(req.user);
     res.redirect('/');
   });
   // Slack authorization routes
