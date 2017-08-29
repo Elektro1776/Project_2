@@ -2,6 +2,8 @@ const passport = require('passport');
 var express = require('express');
 var GitHubStrategy = require('passport-github2').Strategy;
 var github = require('./ghkey.js');
+const orm = require('../db/orm');
+console.log(' WHAT IS THE ORM', orm);
 module.exports = passport.use(new GitHubStrategy({
     clientID: github.id,
     clientSecret: github.secret,
@@ -12,10 +14,14 @@ module.exports = passport.use(new GitHubStrategy({
       user = profile;
       console.log(accessToken, " access token");
       console.log(refreshToken, " refresh token");
-      console.log(profile, " profile");
-      return done(null, user);
+      console.log(user.id, " profile");
+      orm.createUser(user).then((results) => {
+        return done(null, user);
+
+      })
     }
     else {
       return done(null, false);
     }
-}));
+})
+);

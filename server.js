@@ -5,6 +5,7 @@ const http = require('http');
 const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 const passport = require('passport');
+const session = require('express-session')
 var github = require('./src/auth/gitHubAuth.js');
 var slack = require('./src/auth/slackAuth.js');
 const path = require('path');
@@ -27,8 +28,18 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
+app.use(session({
+  secret: 'fluffykittytits'
+}))
 app.use(passport.initialize());
 app.use(passport.session());
+passport.serializeUser(function(user, done){
+  // console.log("user data serialized", user);
+  done(null, user);
+})
+passport.deserializeUser(function(user, done){
+  done(null, user);
+})
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
