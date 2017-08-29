@@ -16,18 +16,36 @@ router.get('/projects', (req, res) => {
     json: true,
     url: 'https://api.github.com/user/repos?access_token=' + github.token + '&per_page=5&sort=created&direction=desc&page=' + pageNumber,
   }, (err, response, projects) => {
-    // console.log(projects, " projects");
-    // request({
-    //   headers: {
-    //     "Accept": "application/vnd.github.v3.full+json",
-    //     "User-Agent": "request"
-    //   },
-    //   method: 'GET',
-    //   json: true,
-    //   url: 'https://api.github.com/repos/901david/' + req.body.repo + '/issues'
-    // }, (err, response, issues) => {
-    //   console.log(' WHAT IS THE BODY?', issues);
-    // })
+    // console.log(projects[0], " projects");
+    var userName = projects[0].owner.login
+    var issueArray = [];
+    for (let i = 0; i < 5; i++) {
+      let repoName = projects[i].name;
+      issueArray.push(repoName);
+      // issueArray.push({projects[i].name: []});
+      request({
+        headers: {
+          "Accept": "application/vnd.github.v3.full+json",
+          "User-Agent": "request"
+        },
+        method: 'GET',
+        json: true,
+        url: 'https://api.github.com/repos/' + userName + '/' + repoName + '/issues'
+      }, (err, response, issues) => {
+        var issueObj = {};
+        for (let i = 0; i < issueArray.length - 1; i++) {
+
+        }
+        console.log(issueArray);
+        console.log(repoName, ' lin 36')
+
+
+        // issueObj[currentRepo] = issues;
+        // console.log(' IssueObj', issueObj);
+      })
+    }
+    // console.log('Issue obj ', issueArray);
+
     let linkHeader = response.headers.link;
     var parsed = parse(linkHeader);
     // console.log(parsed);
@@ -65,7 +83,6 @@ router.post('/projects', (req, res) => {
    }
    else {
      pageNumber = 1;
-     console.log("I really hope this never falls to this.");
    }
   request({
     headers: {
