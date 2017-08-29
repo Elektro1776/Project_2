@@ -32,13 +32,12 @@
         </h4>
       </div>
       <div id="collapse{{id}}" class="panel-collapse collapse">
-        <br>
+        <p class='userArg'>Repo Owner: <a href='https://github.com/{{ owner.login }}'>{{ owner.login }}</a></p>
         <p>Description: {{ description }} </p>
+        <br>
         <p> Issues: </p>
         <p class='issueTextAppend'></p>
-        <p> {{ body }} </p>
-        <p> {{ assignees }} </p>
-        <p class='userArg'>Repo Owner: {{ owner.login }}</p>
+
         <form class="projectInfo" action='/api/github/addCollaborator' method='POST'>
           <input type='' class='form-control input-lg' name='username' placeholder='Add Collaborator' >
           <input type="hidden" name="owner" value='{{owner.login}}'>

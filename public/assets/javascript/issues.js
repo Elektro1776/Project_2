@@ -11,24 +11,21 @@ $(document).ready(()=>{
     currentObj.repo = repoName;
 
     $.post('/api/github/getIssues', currentObj, function (data) {
-      // console.log(data[0].user.login);
+      console.log(data[0]);
 
 
         for (issues in data) {
-          console.log(data[0]);
-          if (data[issues].user.login === undefined) {
-            collapseChild.children('.issueTextAppend').append('<p>No Issues Currently</p>');
+          for (users in data[issues].assignees) {
+            if (data[issues].user.login === undefined) {
+              collapseChild.children('.issueTextAppend').append('<p>No Issues Currently</p>');
 
+            }
+            else {
+              collapseChild.children('.issueTextAppend').append('<p>Title: ' + data[issues].title + '<span>   |   </span>Created By: <a href="https://github.com/' + data[issues].user.login + '">' + data[issues].user.login + '</a><span>   |   </span>Issue #: ' + data[issues].number + '<span>   |   </span>Assignees: <a href="https://github.com/' + data[issues].assignees[users].login + '">' + data[issues].assignees[users].login + '</a></p><p>Body: ' + data[issues].body + '</p><hr/>');
+
+            }
           }
-          else {
-            collapseChild.children('.issueTextAppend').append('<p>Title: ' + data[issues].title + '</p><p>Created By: ' + data[issues].user.login + '</p><p>Body: ' + data[issues].body + '</p><p>Assignees: ' + data[issues].assignees[0].login + '</p>');
-
-          }
-
-
         }
-
-
     });
 
 

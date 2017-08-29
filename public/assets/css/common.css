@@ -212,3 +212,8 @@ margin-top: 5px;
   max-height: 450px;
   margin: auto;
 }
+.issueTextAppend {
+/*text-align: center;*/
+font-size: 14px;
+font-weight: bold;
+}
