@@ -5,7 +5,13 @@ html, body {
   font-size: 18px;
 }
 .row {
-  margin-bottom: 50px;  
+  margin-bottom: 50px;
+}
+#funDropdown {
+  width:500px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: center;
 }
 .formAdjust {
   margin-left: 10px;
