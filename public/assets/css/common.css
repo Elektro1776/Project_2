@@ -2,13 +2,21 @@ html, body {
   height: 100%;
 }
 .reSizer {
-  font-size: 45px;
+  font-size: 18px;
+}
+.row {
+  margin-bottom: 50px;  
+}
+.formAdjust {
+  margin-left: 10px;
+  margin-right: 10px;
 }
 body {
   display: flex;
   flex-direction: column;
   background-color: #336dea;
   transition: background-color .5s;
+
 }
 .content {
   flex: 1 0 auto;
