@@ -1,0 +1,37 @@
+$(document).ready(()=>{
+  $('.panel-default').on('click', function(){
+    // console.log(this);
+    let currentObj = {};
+    let collapseChild = $(this).children('.panel-collapse');
+    collapseChild.toggleClass('collapse').toggleClass('in');
+    let userName = $(this).find('.userArg').text().slice(11).trim();
+    // console.log(userName);
+    let repoName = $(this).find('.nameArg').text().trim();
+    currentObj.owner = userName;
+    currentObj.repo = repoName;
+
+    $.post('/api/github/getIssues', currentObj, function (data) {
+      // console.log(data[0].user.login);
+
+
+        for (issues in data) {
+          console.log(data[0]);
+          if (data[issues].user.login === undefined) {
+            collapseChild.children('.issueTextAppend').append('<p>No Issues Currently</p>');
+
+          }
+          else {
+            collapseChild.children('.issueTextAppend').append('<p>Title: ' + data[issues].title + '</p><p>Created By: ' + data[issues].user.login + '</p><p>Body: ' + data[issues].body + '</p><p>Assignees: ' + data[issues].assignees[0].login + '</p>');
+
+          }
+
+
+        }
+
+
+    });
+
+
+
+  });
+});
