@@ -65,7 +65,7 @@ $('.projectButton').click(function(e) {
     method: 'GET',
     url: '/userstories'
   }).done(function() {
-    window.location.href = '/userstories'
+    window.location.href = `/userstories?project_id=${projectId}`
     console.log(projectId,' WENT SOME WHERE???');
   })
 
