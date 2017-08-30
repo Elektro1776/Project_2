@@ -1,0 +1,12 @@
+<div col-lg-12>
+
+    {{#each issues}}
+      {{#unless closed_at}}
+        <p>{{user.login}}</p>
+        <p>{{title}}</p>
+        <p>{{body}}</p>
+        <p>{{assignees}}</p>
+      {{/unless}}
+    {{/each}}
+
+</div>
