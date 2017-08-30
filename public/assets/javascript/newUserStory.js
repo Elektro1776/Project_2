@@ -83,7 +83,12 @@ const postToApi = function() {
     $("#otherModal").modal("hide");
 
     //make POST request to send to database and handle with controller
-    $.post("/userstories", JSON.stringify(currentUserStory), function(data) {});
+    $.post(
+      "/userstories",
+      currentUserStory,
+      function(data) {},
+      'application/json'
+    );
 
     //clear out text boxes incase they want to add multiple user stories
     $("#userStory").val("");

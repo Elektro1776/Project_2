@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const sessionStore = require('../../server');
+// console.log(' DO WE HAVE SESSION STORE', sessionStore);
 
-router.get('/', (req, res) => {
-  console.log(' DO WE HAVE AUTH USER ON HOME ROUTER', req.user);
-  res.render('home', { title: 'uTile'})
-});
-
-module.exports = router;
+exports.dashboard = (req, res) => {
+  res.render('home', { title: 'uTile' })
+}

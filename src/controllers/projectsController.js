@@ -6,6 +6,7 @@ var parse = require('parse-link-header');
 
 
 router.get('/projects', (req, res) => {
+  console.log(' REQ USER', req.session);
   let pageNumber = 1;
   request({
     headers: {
