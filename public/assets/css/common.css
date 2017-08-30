@@ -7,6 +7,16 @@ html, body {
 .row {
   margin-bottom: 50px;
 }
+#codeFrame{
+  width:500px;
+  height:500px;
+  margin-left:8%;
+}
+#snippetFrame {
+  width:500px;
+  height:500px;
+  background-color: white;
+}
 #funDropdown {
   width:500px;
   padding-left: 10px;
