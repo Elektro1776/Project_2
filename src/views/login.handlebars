@@ -10,7 +10,11 @@
 
     <div class="col-lg-6">
       <div class="col-lg-4">
-        <a href="/auth/github" class='btn btn-lg btn-default '><img src= "./assets/icons/Octocat.png" class ="buttonHome">Github Login</a>
+        <!-- <a href="/auth/github" class='btn btn-lg btn-default '> -->
+          <form action="/auth/github" method="get">
+    <button type="submit" value="/auth/github"><img src= "./assets/icons/Octocat.png" class ="buttonHome"></button>Github Login
+  <!-- </a> -->
+</form>
       </div>
       <div class="col-lg-4">
         <a href="/auth/gitlab" id='gitlab' class='btn btn-lg btn-default '><img src= "./assets/icons/logo.png" class ="buttonHome">GitLab Login</a>

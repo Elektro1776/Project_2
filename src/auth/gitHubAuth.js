@@ -11,12 +11,19 @@ module.exports = passport.use(new GitHubStrategy({
   },
   function(accessToken, refreshToken, profile, done) {
     if (profile) {
-      user = profile;
-      console.log(accessToken, " access token");
-      console.log(refreshToken, " refresh token");
-      console.log(user.id, " profile");
+      const {id, username, email, provider} = profile;
+      console.log(accessToken, "access token");
+      const user = {};
+      user.id = id;
+      user.username = username;
+      user.email = email;
+      user.provider = provider;
+      user.github = { token: accessToken} ;
+      console.log(user, " profile");
+      // console.log(refreshToken, " refresh token");
       orm.createUser(user).then((results) => {
-        return done(null, user);
+        console.log(' WHAT IS DONE?', user);
+        return done(null, profile, user.github);
 
       })
     }

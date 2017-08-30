@@ -1,8 +1,6 @@
 const mysql = require('mysql')
 const crypto = require('crypto')
-const knex = require('knex')(require('./db_config.js'))
-
-
+const { knex } = require('../../server');
 module.exports = {
   createUser(profile) {
     // console.log(id,username,authProvider)

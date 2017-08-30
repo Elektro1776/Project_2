@@ -6,6 +6,7 @@ var parse = require('parse-link-header');
 
 
 router.get('/projects', (req, res) => {
+  console.log(' REQ USER', req.session);
   let pageNumber = 1;
   request({
     headers: {
@@ -28,6 +29,7 @@ router.get('/projects', (req, res) => {
     // }, (err, response, issues) => {
     //   console.log(' WHAT IS THE BODY?', issues);
     // })
+    // console.log(' WHAT ARE THE HEADERS???', response.headers.link, projects);
     let linkHeader = response.headers.link;
     var parsed = parse(linkHeader);
     // console.log(parsed);
