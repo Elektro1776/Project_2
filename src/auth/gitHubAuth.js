@@ -6,15 +6,15 @@ const orm = require('../db/orm');
 console.log(' WHAT IS THE ORM', orm);
 module.exports = function(passport) {
   passport.serializeUser(function(profile, done){
-    const {id, username, email, provider} = profile;
+    const {id, username, email, provider, github} = profile;
     // console.log("user data serialized", profile);
-    console.log('SERIALIZING USER NOW', new Date());
+    console.log('SERIALIZING USER NOW', profile,);
     const user = {};
     user.id = id;
     user.username = username;
     user.email = email;
     user.provider = provider;
-    // user.github = { token: accessToken} ;
+    user.github = { token: github.token} ;
     done(null, user);
   })
   passport.deserializeUser(function(user, done){
@@ -30,7 +30,7 @@ module.exports = function(passport) {
     if (profile) {
       const {id, username, email, provider} = profile;
       // console.log(accessToken, "access token");
-      const user = {};
+      const user = Object.create({});
       user.id = id;
       user.username = username;
       user.email = email;
@@ -40,7 +40,8 @@ module.exports = function(passport) {
       // console.log(refreshToken, " refresh token");
       orm.createUser(user).then((results) => {
         // console.log(' WHAT IS DONE?', user);
-        return done(null, profile);
+
+        return done(null, user);
 
       })
     }

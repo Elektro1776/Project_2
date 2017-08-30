@@ -28,9 +28,10 @@ const postToApi = function() {
     storyProgress: $("#projectStatus").val().trim(),
     storyDueDate: $("#createDate").val().trim(),
     selectedMatrixSection: $("#githubDropDown").val(),
-    method: "create"
+    project_id: $('#project_id').text(),
+    method: "create",
   };
-
+  console.log(' WHAT THE HELL IS THIS VALUE',  $('#project_id'));
   let currentStory = validateUserInput(currentUserStory);
 
   if (currentStory === true) {
@@ -50,7 +51,9 @@ const postToApi = function() {
       storyProgress: $("#projectStatus").val().trim(),
       storyDueDate: $("#createDate").val().trim(),
       selectedMatrixSection: $("#githubDropDown").val(),
-      method: "create"
+      method: "create",
+      project_id: $('#project_id').text().trim(),
+
     };
     console.log(currentUserStory);
     let newStory = `
