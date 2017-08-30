@@ -99,14 +99,13 @@ router.post('/api/github/createIssue', (req, res)=>{
         },
         method: 'POST',
         json: true,
-        url: 'https://api.github.com/user/repos?access_token=' + req.body.token,
+        url: 'https://api.github.com/user/repos?access_token=' + github.token, //req.body.token,
         body: {name: req.body.name,
-          allow_rebase_merge: req.body.allow_rebase_merge,
+          allow_rebase_merge: true,
           description: req.body.description,
-          'auto-init': true,
-          gitignore_template: req.body.gitignore_template}
+          'auto-init': true}
         }, (err, response, body) => {
-          console.log(' WHAT IS THE BODY?', body);
+          res.redirect('/projects');
         })
       });
 
