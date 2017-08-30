@@ -3,7 +3,7 @@ $(document).ready(()=>{
     $('.issueTextAppend').empty();
     let currentObj = {};
     let collapseChild = $(this).children('.panel-collapse');
-    collapseChild.toggleClass('collapse').toggleClass('in');
+    collapseChild.toggleClass('collapse')
     let userName = $(this).find('.userArg').text().slice(11).trim();
     // console.log(userName);
     let repoName = $(this).find('.nameArg').text().trim();
