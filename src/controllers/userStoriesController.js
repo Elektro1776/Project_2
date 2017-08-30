@@ -1,9 +1,8 @@
 const express = require("express");
 const router = express.Router();
-
+const orm = require('../db/orm');
 const validateUserInput = function(req, res) {
-  console.log("Pulling", req.body);
-
+  orm.createUserStory(req.body);
   res.redirect("/userstories");
   //make sure the data is sent to database once implemented
 };

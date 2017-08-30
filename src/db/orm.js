@@ -5,7 +5,7 @@ module.exports = {
   createUser(profile) {
     // console.log(id,username,authProvider)
     const { id, username, email, provider } = profile;
-    console.log(' WHAT IS OUR ID?', id);
+    // console.log(' WHAT IS OUR ID?', id);
     return knex('Authentication').where({
       github_federation_id: id,
     }).then(user => {
@@ -17,7 +17,6 @@ module.exports = {
           initial_federation: provider
         })
       } else {
-        console.log(' WE HAVE A USER', user);
         return
       }
     })
@@ -36,6 +35,15 @@ module.exports = {
      return knex.select().from('User_Story')
     // knex.select('utile_username', 'full_name', 'phone', 'email').from('User').where('isActive',1).timeout(1000, {cancel: true})
   },
+  createUserStory(userStory) {
+    console.log(' WHAT IS OUR USER STORY?', userStory);
+    const { storyTitle, storyDescription, storyProgress, storyDueDate, selectedMatrixSection } = userStory
+    return knex('User_Story').insert({ story_title: storyTitle}).then((results) => {
+      console.log(' DO WE HAVE RESULTS', results);
+    }).catch((err) => {
+      console.log(' HUSTON ERRRRR', err);
+    })
+  }
 
 
 }

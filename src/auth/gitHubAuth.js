@@ -1,10 +1,27 @@
-const passport = require('passport');
+// const passport = require('passport');
 var express = require('express');
 var GitHubStrategy = require('passport-github2').Strategy;
 var github = require('./ghkey.js');
 const orm = require('../db/orm');
 console.log(' WHAT IS THE ORM', orm);
-module.exports = passport.use(new GitHubStrategy({
+module.exports = function(passport) {
+  passport.serializeUser(function(profile, done){
+    const {id, username, email, provider} = profile;
+    // console.log("user data serialized", profile);
+    console.log('SERIALIZING USER NOW', new Date());
+    const user = {};
+    user.id = id;
+    user.username = username;
+    user.email = email;
+    user.provider = provider;
+    // user.github = { token: accessToken} ;
+    done(null, user);
+  })
+  passport.deserializeUser(function(user, done){
+    // console.log(' WHEN IS DESERIALIZE CALLED ', );
+    done(null, user);
+  })
+  passport.use(new GitHubStrategy({
     clientID: github.id,
     clientSecret: github.secret,
     callbackURL: "http://127.0.0.1:3000/auth/github/callback"
@@ -12,18 +29,18 @@ module.exports = passport.use(new GitHubStrategy({
   function(accessToken, refreshToken, profile, done) {
     if (profile) {
       const {id, username, email, provider} = profile;
-      console.log(accessToken, "access token");
+      // console.log(accessToken, "access token");
       const user = {};
       user.id = id;
       user.username = username;
       user.email = email;
       user.provider = provider;
       user.github = { token: accessToken} ;
-      console.log(user, " profile");
+      // console.log(user, " profile");
       // console.log(refreshToken, " refresh token");
       orm.createUser(user).then((results) => {
-        console.log(' WHAT IS DONE?', user);
-        return done(null, profile, user.github);
+        // console.log(' WHAT IS DONE?', user);
+        return done(null, profile);
 
       })
     }
@@ -32,3 +49,4 @@ module.exports = passport.use(new GitHubStrategy({
     }
 })
 );
+}

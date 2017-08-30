@@ -13,19 +13,18 @@ module.exports = {
 }
 var KnexSessionStore = require('connect-session-knex')(session);
 const config = require('./src/db/db_config');
-
+require('./src/auth/gitHubAuth')(passport);
 var github = require('./src/auth/gitHubAuth.js');
 var slack = require('./src/auth/slackAuth.js');
 const path = require('path');
 const app = express();
 const port = process.env.PORT || 3000;
-const dashboard = require('./src/routes/index');
 const homeRouter = require('./src/controllers/homeController');
 const projectsRouter = require('./src/controllers/projectsController');
 const githubGetRoutes = require('./src/api/githubRoutes/githubRoutes.js');
 const userStoriesRouter = require('./src/controllers/userStoriesController');
 const slackRouter = require('./src/apps/slackController');
-const authRouter = require('./src/controllers/authController');
+// const authRouter = require('./src/controllers/authController');
 const sessionStore = new KnexSessionStore({
     knex: knex,
     tablename: 'sessions'
@@ -58,43 +57,12 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-passport.serializeUser(function(profile, done){
-  const {id, username, email, provider} = profile;
-  console.log("user data serialized", profile);
-
-  const user = {};
-  user.id = id;
-  user.username = username;
-  user.email = email;
-  user.provider = provider;
-  // user.github = { token: accessToken} ;
-  done(null, user);
-})
-passport.deserializeUser(function(user, done){
-  console.log(' WHEN IS DESERIALIZE CALLED ', );
-  done(null, user);
-})
-function isLoggedIn(req, res, next) {
-      if (req.isAuthenticated()) {
-        console.log(' WE SHOULD HAVE AUTH???', );
-        return next();
-
-      }
-      console.log(' WHAT IS THE REQ AUTH', req.isAuthenticated());
-      // res.render('login')
-      return res.redirect('/login');
-  }
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
-app.get('/', isLoggedIn, dashboard)
-app.get('/login', authRouter);
-app.get('/logout', authRouter);
 
-app.get('/auth/github', authRouter);
-app.get('/auth/github/callback', authRouter)
-// app.use(authRouter);
-// app.get('/login', authRouter);
+require('./src/routes/signup')(app, passport);
+
 app.use(userStoriesRouter);
 app.get('/projects', projectsRouter);
 app.use(slackRouter);
