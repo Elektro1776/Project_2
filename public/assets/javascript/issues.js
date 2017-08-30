@@ -17,12 +17,11 @@ $(document).ready(()=>{
                 let assigneesLink;
                 if (data[issues].assignee !== null) {
                   assignees = data[issues].assignee.login;
-                  assigneesLink = "https://github.com/"
+                  assigneesLink = '<a href="https://github.com/' + assignees + '">' + assignees + '</a>';
 
                 }
                 else {
-                  assignees = "Currently None";
-                  assigneesLink = "#";
+                  assigneesLink = "Currently None";
                 }
                 let bodyText;
                 if (data[issues].body === "") {
@@ -31,7 +30,7 @@ $(document).ready(()=>{
                 else {
                   bodyText = data[issues].body;
                 }
-                collapseChild.children('.issueTextAppend').append('<p>Title: ' + data[issues].title + '<span>   |   </span>Created By: <a href="https://github.com/' + data[issues].user.login + '">' + data[issues].user.login + '</a><span>   |   </span>Issue #: ' + data[issues].number + '<span>   |   </span>Assignee: <a href="' + assigneesLink + assignees + '">' + assignees + '</a></p><p>Body: ' + data[issues].body + '</p><hr/>');
+                collapseChild.children('.issueTextAppend').append('<p>Title: ' + data[issues].title + '<span>   |   </span>Created By: <a href="https://github.com/' + data[issues].user.login + '">' + data[issues].user.login + '</a><span>   |   </span>Issue #: ' + data[issues].number + '<span>   |   </span>Assignee: ' + assigneesLink + '</p><p>Body: ' + data[issues].body + '</p><hr/>');
 
         }
     });
