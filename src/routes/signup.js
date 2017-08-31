@@ -26,19 +26,15 @@ module.exports = (app, passport) => {
     }
   )
   app.get('/login', (req, res) => {
-    console.log(' IS THIS FIRING ????');
     res.render('login', { title: 'Trilll'});
   });
   app.get('/logout', function(req, res){
-    console.log('FIRE LOGOUT!!!!!!!!' );
     req.session.destroy(function (err) {
       res.redirect('/'); //Inside a callback… bulletproof!
     });
   });
   function isLoggedIn(req, res, next) {
-    console.log(' WHAT IS THE REQ AUTH', req.isAuthenticated(), req.user);
         if (req.isAuthenticated()) {
-          console.log(' WE SHOULD HAVE AUTH???' );
           return next();
 
         }

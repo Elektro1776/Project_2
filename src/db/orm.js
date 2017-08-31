@@ -32,9 +32,7 @@ module.exports = {
     // knex.select('utile_username', 'full_name', 'phone', 'email').from('User').where('isActive',1).timeout(1000, {cancel: true})
   },
   getUserStory(id) {
-    console.log(' WHAT IS THE ID WE ARE SENDING?',id);
      return knex('User_Story').where('project_title', id).then((results) => {
-       console.log(' WHAT ARE THE RESULTS', results);
        return results;
      }).catch((err) => {
        console.log(' HUSTON ERR GETING USER STORY', err);

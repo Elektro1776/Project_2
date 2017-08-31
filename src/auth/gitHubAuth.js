@@ -1,7 +1,7 @@
 // const passport = require('passport');
 var express = require('express');
 var GitHubStrategy = require('passport-github2').Strategy;
-var github = require('./ghkey.js');
+var github = require('./ghkey.js') || null;
 const orm = require('../db/orm');
 console.log(' WHAT IS THE ORM', orm);
 module.exports = function(passport) {
