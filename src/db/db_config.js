@@ -9,24 +9,3 @@ module.exports = {
     database : 'Utile_db',
   }
 };
-// const knex = require('knex')(config)
-//
-//
-// const Knex = require('knex');
-// const knex = Knex({
-//     client: 'pg',
-//     connection: {
-//         host: '127.0.0.1',
-//         user: 'postgres',
-//         password: '',
-//         database: 'travis_ci_test'
-//     }
-// });
-//
-// const store = new KnexSessionStore({
-//     knex: knex,
-//     tablename: 'sessions' // optional. Defaults to 'sessions'
-// });
-//
-//
-// module.exports = knex;
