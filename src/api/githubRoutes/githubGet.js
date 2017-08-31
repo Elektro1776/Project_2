@@ -61,7 +61,7 @@ const request = require("request");
      },
      method: 'GET',
      json: true,
-     url: 'https://api.github.com/repos/' + req.body.owner + '/' + req.body.repo + '/collaborators?access_token=' + req.body.github.token
+     url: 'https://api.github.com/repos/' + req.body.owner + '/' + req.body.repo + '/collaborators?access_token=' + req.user.github.token
    }, (err, response, body) => {
      console.log(' WHAT IS THE BODY?', body);
    })
