@@ -8,7 +8,7 @@ module.exports = function(passport) {
   passport.serializeUser(function(profile, done){
     const {id, username, email, provider, github} = profile;
     // console.log("user data serialized", profile);
-    console.log('SERIALIZING USER NOW', profile,);
+    console.log('SERIALIZING USER NOW', profile);
     const user = {};
     user.id = id;
     user.username = username;
