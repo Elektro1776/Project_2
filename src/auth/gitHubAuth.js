@@ -24,7 +24,7 @@ module.exports = function(passport) {
   passport.use(new GitHubStrategy({
     clientID: github.id ,
     clientSecret: github.secret ,
-    callbackURL: "http://ec2-34-212-47-239.us-west-2.compute.amazonaws.com/auth/github/callback"
+    callbackURL: "http:/localhost:3000/auth/github/callback"
   },
   function(accessToken, refreshToken, profile, done) {
     if (profile) {
