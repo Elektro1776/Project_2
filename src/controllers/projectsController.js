@@ -6,6 +6,7 @@ var parse = require('parse-link-header');
 
 
 router.get('/projects', (req, res) => {
+  console.log(' REQ USER', req.user.github.token);
   let pageNumber = 1;
   request({
     headers: {
@@ -14,15 +15,15 @@ router.get('/projects', (req, res) => {
     },
     method: 'GET',
     json: true,
-    url: 'https://api.github.com/user/repos?access_token=' + github.token + '&per_page=5&sort=created&direction=desc&page=' + pageNumber,
+    url: 'https://api.github.com/user/repos?access_token=' + req.user.github.token+ '&per_page=5&sort=created&direction=desc&page=' + pageNumber,
   }, (err, response, projects) => {
-    console.log(projects[0], " projects");
+    // console.log(projects[0], " projects");
 
     var userName = projects[0].owner.login
     var issueArray = [];
     for (let i = 0; i < 5; i++) {
       if (projects[i].has_issues) {
-        console.log("This has issues");
+        // console.log("This has issues");
       }
       else {
         projects[i].no_issues = "There are currently no Issues";
@@ -111,7 +112,6 @@ router.post('/projects', (req, res) => {
     }
 
     let pages = {"pageForward": nextPage, "pageBackward": prevPage};
-    console.log(pages)
     res.render('projects', { title: 'uTile', projects, pages});
   })
 });

@@ -4,9 +4,16 @@ const router = express.Router();
 const GitHubStrategy = require('../auth/gitHubAuth');
 const SlackStrategy = require('../auth/slackAuth');
 // console.log(' WHAT IS THE STRATEGY', GitLabStrategy.authenticate);
-router.get('/login', (req, res) => {
-  res.render('login', { title: 'Trilll'});
-})
+
+// router.get('/login', (req, res) => {
+//   console.log(' IS THIS FIRING ????');
+//   res.render('login', { title: 'Trilll'});
+// })
+// router.get('/logout', (req, res) => {
+//   req.logout();
+//   console.log(' WHATtttt ,', req.logout);
+//   res.redirect('/login')
+// })
 // router.get('/auth/gitlab',
 //   GitLabStrategy.authenticate('gitlab'),
 //   (req, res) => {
@@ -21,22 +28,26 @@ router.get('/login', (req, res) => {
 // })
 //Github authentification routes
 router.get('/auth/github',
-  GitHubStrategy.authenticate('github', { scope: [ 'user:vdavidhamond@gmail.com' ] }));
+  GitHubStrategy.authenticate('github', { scope: ['user:email'] })
+);
 
 router.get('/auth/github/callback',
-  GitHubStrategy.authenticate('github', { failureRedirect: '/login' }),
-  function(req, res) {
-    console.log("This is the authenticated user", req.user);
-    // Successful authentication, redirect home.
-    // req.login(req.user);
-    res.redirect('/');
-  });
+  GitHubStrategy.authenticate('github', {
+    // successRedirect : '/',
+    failureRedirect: '/login'
+  }),
+  (req, res) => {
+    console.log(' CALL BACK SUCCESSSS', req.user);
+    res.redirect('/')
+  }
+)
+
   // Slack authorization routes
-  router.get('/auth/slack', SlackStrategy.authenticate('slack'));
-  router.get('/auth/slack/callback',
-    SlackStrategy.authenticate('slack', { failureRedirect: '/login' }),
-    function(req, res) {
-      // Successful authentication, redirect home.
-      res.redirect('/');
-    });
+  // router.get('/auth/slack', SlackStrategy.authenticate('slack'));
+  // router.get('/auth/slack/callback',
+  //   SlackStrategy.authenticate('slack', { failureRedirect: '/login' }),
+  //   function(req, res) {
+  //     // Successful authentication, redirect home.
+  //     res.redirect('/');
+  //   });
 module.exports = router;

@@ -1,86 +1,83 @@
 <!-- Accordion structure -->
 
 
-  <div class= "row">
-    <br/><br/>
+<div class="row bottomSpace">
+  <br/><br/>
 
-    <form class="pull-left formAdjust" action="/Projects" method="POST">
-      <input type="hidden" name="urlBackward" value='{{pages.pageBackward}}'
- id="inputField">
- <button type="submit" class="btn btn-primary">
+  <form class="pull-left formAdjust" action="/Projects" method="POST">
+    <input type="hidden" name="urlBackward" value='{{pages.pageBackward}}' id="inputField">
+    <button type="submit" class="btn btn-primary">
   <span class="glyphicon glyphicon-menu-left reSizer" id="goBack"></span><span class='reSizer'>Previous Repos</span>
 </button>
-    </form>
-    <form class="pull-right formAdjust" action="/Projects" method="POST">
-      <input type="hidden" name="urlForward" value='{{pages.pageForward}}'
- id="inputField">
- <button type="submit" class="btn btn-primary">
+  </form>
+  <form class="pull-right formAdjust" action="/Projects" method="POST">
+    <input type="hidden" name="urlForward" value='{{pages.pageForward}}' id="inputField">
+    <button type="submit" class="btn btn-primary">
   <span class='reSizer'>Next Repos</span><span class="glyphicon glyphicon-menu-right reSizer" id="goForward"></span>
 </button>
-    </form>
-    <div class= "col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset3">
-      {{#each projects}}
-  <div class="panel-group">
-    <div class="panel panel-default">
-      <button id='{{id}}' class="projectButton glyphicon glyphicon-fullscreen btn btn-success" aria-hidden="true"></button>
-      <div class="panel-heading" {{!--data-toggle="collapse"--}}  href="#collapse{{id}}">
-        <h4 class="panel-title">
-          <div {{!--data-toggle="collapse"--}} class='nameArg'  href="#collapse{{id}}">{{name}}</div>
-        </h4>
-      </div>
-      <div id="collapse{{id}}" class="panel-collapse collapse">
-        
-        <p class='userArg'>Repo Owner: <a href='https://github.com/{{ owner.login }}'>{{ owner.login }}</a></p>
-        <p>Description: {{ description }} </p>
-        <br>
-        <p> Issues: </p>
-        <p class='issueTextAppend'></p>
-
-        <form class="projectInfo" action='/api/github/addCollaborator' method='POST'>
-          <input type='' class='form-control input-lg' name='username' placeholder='Add Collaborator' >
-          <input type="hidden" name="owner" value='{{owner.login}}'>
-          <input type="hidden" name="repo" value='{{name}}'>
-          <button type='submit' class='btn btn-lg btn-default '>Add Collaborator</button>
-
-        </form>
-        <form class="projectInfo" action='/api/github/createPullRequest' method='POST'>
-          <input type='' class='form-control input-lg' name='title' placeholder='Create PR' >
-          <input type="hidden" name="owner" value='{{owner.login}}'>
-          <input type="hidden" name="repo" value='{{name}}'>
-          <button type='submit' class='btn btn-lg btn-default '>Create PR</button>
-
-        </form>
-        <form class="projectInfo" action='/api/github/createIssue' method='POST'>
-          <input type='' class='form-control input-lg' name="title" placeholder='Create Issue' >
-          <input type="hidden" name="owner" value="{{owner.login}}">
-          <input type="hidden" name="repo" value="{{name}}">
-          <input type="hidden" name="body" value="optional">
-          <input type="hidden" name="assignees" value="901david">
-          <button type='submit' class='btn btn-lg btn-default '>Create Issue</button>
-
-        </form>
-        <form class="projectInfo" action='/api/github/addAssignees' method='POST'>
-          <input type='' class='form-control input-lg' name='assignees' placeholder='Assign Issues' >
-          <input type="hidden" name="owner" value='{{owner.login}}'>
-          <input type="hidden" name="repo" value='{{name}}'>
-          <input type="hidden" name="number" value='26'>
-          <button type='submit' class='btn btn-lg btn-default '>Assign Issues</button>
-
-        </form>
-
-        <button type="button" class="btn btn-success popStyle" data-toggle="popover" data-content="jazz">Add collaborator</button>
-        <div id="popover" class="hide">
-          <form>
-            <input></input>
-            <button type="submitCollab" class="btn btn-info">Submit</button>
-          </form>
+  </form>
+  <div class="col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset3">
+    {{#each projects}}
+    <div class="panel-group">
+      <div class="panel panel-default">
+        <button id='{{id}}' class="projectButton glyphicon glyphicon-fullscreen btn btn-success" aria-hidden="true"></button>
+        <div class="panel-heading" {{!--data-toggle="collapse" --}} href="#collapse{{id}}">
+          <h4 class="panel-title">
+            <div {{!--data-toggle="collapse" --}} class='nameArg' href="#collapse{{id}}">{{name}}</div>
+          </h4>
         </div>
+        <div id="collapse{{id}}" class="panel-collapse collapse">
+          <p class='userArg'>Repo Owner: <a href='https://github.com/{{ owner.login }}'>{{ owner.login }}</a></p>
+          <p>Description: {{ description }} </p>
+          <br>
+          <p> Issues: </p>
+          <p class='issueTextAppend'></p>
 
+          <form class="projectInfo" action='/api/github/addCollaborator' method='POST'>
+            <input type='' class='form-control input-lg' name='username' placeholder='Add Collaborator'>
+            <input type="hidden" name="owner" value='{{owner.login}}'>
+            <input type="hidden" name="repo" value='{{name}}'>
+            <button type='submit' class='btn btn-lg btn-default '>Add Collaborator</button>
+
+          </form>
+          <form class="projectInfo" action='/api/github/createPullRequest' method='POST'>
+            <input type='' class='form-control input-lg' name='title' placeholder='Create PR'>
+            <input type="hidden" name="owner" value='{{owner.login}}'>
+            <input type="hidden" name="repo" value='{{name}}'>
+            <button type='submit' class='btn btn-lg btn-default '>Create PR</button>
+
+          </form>
+          <form class="projectInfo" action='/api/github/createIssue' method='POST'>
+            <input type='' class='form-control input-lg' name="title" placeholder='Create Issue'>
+            <input type="hidden" name="owner" value="{{owner.login}}">
+            <input type="hidden" name="repo" value="{{name}}">
+            <input type="hidden" name="body" value="optional">
+            <input type="hidden" name="assignees" value="901david">
+            <button type='submit' class='btn btn-lg btn-default '>Create Issue</button>
+
+          </form>
+          <form class="projectInfo" action='/api/github/addAssignees' method='POST'>
+            <input type='' class='form-control input-lg' name='assignees' placeholder='Assign Issues'>
+            <input type="hidden" name="owner" value='{{owner.login}}'>
+            <input type="hidden" name="repo" value='{{name}}'>
+            <input type="hidden" name="number" value='26'>
+            <button type='submit' class='btn btn-lg btn-default '>Assign Issues</button>
+
+          </form>
+
+
+          <div id="popover" class="hide">
+            <form>
+              <input></input>
+              <button type="submitCollab" class="btn btn-info">Submit</button>
+            </form>
+          </div>
+
+        </div>
       </div>
     </div>
+    {{/each}}
   </div>
-  {{/each}}
-</div>
 
 </div>
 

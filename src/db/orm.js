@@ -1,13 +1,11 @@
 const mysql = require('mysql')
 const crypto = require('crypto')
-const knex = require('knex')(require('./db_config.js'))
-
-
+const { knex } = require('../../server');
 module.exports = {
   createUser(profile) {
     // console.log(id,username,authProvider)
     const { id, username, email, provider } = profile;
-    console.log(' WHAT IS OUR ID?', id);
+    // console.log(' WHAT IS OUR ID?', id);
     return knex('Authentication').where({
       github_federation_id: id,
     }).then(user => {
@@ -19,7 +17,6 @@ module.exports = {
           initial_federation: provider
         })
       } else {
-        console.log(' WE HAVE A USER', user);
         return
       }
     })
@@ -35,9 +32,33 @@ module.exports = {
     // knex.select('utile_username', 'full_name', 'phone', 'email').from('User').where('isActive',1).timeout(1000, {cancel: true})
   },
   getUserStory(id) {
-     return knex.select().from('User_Story')
+    console.log(' WHAT IS THE ID WE ARE SENDING?',id);
+     return knex('User_Story').where('project_title', id).then((results) => {
+       console.log(' WHAT ARE THE RESULTS', results);
+       return results;
+     }).catch((err) => {
+       console.log(' HUSTON ERR GETING USER STORY', err);
+     })
     // knex.select('utile_username', 'full_name', 'phone', 'email').from('User').where('isActive',1).timeout(1000, {cancel: true})
   },
+  createUserStory(userStory) {
+    // console.log(' WHAT IS OUR USER STORY?', userStory);
+    const { storyTitle, storyDescription, storyProgress, storyDueDate, selectedMatrixSection, project_id } = userStory
+    return knex('User_Story').insert({
+      story_title: storyTitle,
+      story_description: storyDescription,
+      story_progress: storyProgress,
+      story_due_date: storyDueDate,
+      select_matrix_section: selectedMatrixSection,
+      project_title: project_id,
+     })
+      .then((results) => {
+      // console.log(' DO WE HAVE RESULTS', results);
+      return
+    }).catch((err) => {
+      console.log(' HUSTON ERRRRR', err);
+    })
+  }
 
 
 }
