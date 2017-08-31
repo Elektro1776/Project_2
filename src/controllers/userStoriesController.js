@@ -10,7 +10,7 @@ const validateUserInput = function(req, res) {
 };
 
 router.get("/userstories", (req, res) => {
-  console.log(' DO WE HAVE PARAMS HERE?', req.query, );
+  console.log(' DO WE HAVE PARAMS HERE?', req.query);
   orm.getUserStory(req.query.project_id).then((userStories) => {
     res.render("userstories", { title: "uTile", project_id: req.query.project_id, userStory: userStories });
 

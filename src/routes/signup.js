@@ -30,7 +30,7 @@ module.exports = (app, passport) => {
     res.render('login', { title: 'Trilll'});
   });
   app.get('/logout', function(req, res){
-    console.log('FIRE LOGOUT!!!!!!!!', );
+    console.log('FIRE LOGOUT!!!!!!!!' );
     req.session.destroy(function (err) {
       res.redirect('/'); //Inside a callback… bulletproof!
     });
@@ -38,7 +38,7 @@ module.exports = (app, passport) => {
   function isLoggedIn(req, res, next) {
     console.log(' WHAT IS THE REQ AUTH', req.isAuthenticated(), req.user);
         if (req.isAuthenticated()) {
-          console.log(' WE SHOULD HAVE AUTH???', );
+          console.log(' WE SHOULD HAVE AUTH???' );
           return next();
 
         }
