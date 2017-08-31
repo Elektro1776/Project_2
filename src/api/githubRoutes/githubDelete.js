@@ -12,7 +12,7 @@ const request = require("request");
      },
      method: 'DELETE',
      json: true,
-     url: 'https://api.github.com/repos/' + req.body.owner + '/' + req.body.repo + '/collaborators/' + req.body.username + '?access_token=' + req.body.token
+     url: 'https://api.github.com/repos/' + req.body.owner + '/' + req.body.repo + '/collaborators/' + req.body.username + '?access_token=' + req.user.github.token
    }, (err, response, body) => {
      console.log(' WHAT IS THE BODY?', body);
    })
@@ -27,7 +27,7 @@ router.post('/api/github/deleteFile', (req, res)=>{
     },
     method: 'DELETE',
     json: true,
-    url: 'https://api.github.com/repos/' + req.body.owner + '/' + req.body.repo + '/contents/' + req.body.path + '?access_token=' + req.body.token
+    url: 'https://api.github.com/repos/' + req.body.owner + '/' + req.body.repo + '/contents/' + req.body.path + '?access_token=' + req.user.github.token
   }, (err, response, body) => {
     console.log(' WHAT IS THE BODY?', body);
   })

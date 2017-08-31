@@ -1,7 +1,7 @@
 const express = require('express');
 const request = require("request");
 const router = express.Router();
-var github = require("../../auth/ghkey.js");
+
 
 // Get issues
 router.post('/api/github/getIssues', (req, res)=>{
@@ -15,7 +15,7 @@ router.post('/api/github/getIssues', (req, res)=>{
     },
     method: 'GET',
     json: true,
-    url: 'https://api.github.com/repos/' + req.body.owner + '/' + req.body.repo + '/issues?access_token=' + github.token,
+    url: 'https://api.github.com/repos/' + req.body.owner + '/' + req.body.repo + '/issues?access_token=' + req.user.github.token,
     body: {filter: "all",
     state: "open",
     sort: "created",
@@ -48,7 +48,7 @@ router.post('/api/github/createIssue', (req, res)=>{
     },
     method: 'POST',
     json: true,
-    url: 'https://api.github.com/repos/' + inputObj.owner + '/' + inputObj.repo + '/issues?access_token=' + github.token, //req.body.token,
+    url: 'https://api.github.com/repos/' + inputObj.owner + '/' + inputObj.repo + '/issues?access_token=' + req.user.github.token, //req.body.token,
     body:{title: inputObj.title,
       body: inputObj.body,
       assignees: inputObj.assignees}
@@ -80,7 +80,7 @@ router.post('/api/github/createIssue', (req, res)=>{
       },
       method: 'POST',
       json: true,
-      url: 'https://api.github.com/repos/' + inputObj.owner + '/' + inputObj.repo + '/pulls?access_token=' + github.token, //req.body.token
+      url: 'https://api.github.com/repos/' + inputObj.owner + '/' + inputObj.repo + '/pulls?access_token=' + req.user.github.token, //req.body.token
       body: {title: inputObj.title,
         head: inputObj.head,
         base: inputObj.base}
@@ -99,7 +99,7 @@ router.post('/api/github/createIssue', (req, res)=>{
         },
         method: 'POST',
         json: true,
-        url: 'https://api.github.com/user/repos?access_token=' + github.token, //req.body.token,
+        url: 'https://api.github.com/user/repos?access_token=' + req.user.github.token, //req.body.token,
         body: {name: req.body.name,
           allow_rebase_merge: true,
           description: req.body.description,
@@ -129,7 +129,7 @@ router.post('/api/github/createIssue', (req, res)=>{
           },
           method: 'POST',
           json: true,
-          url: 'https://api.github.com/repos/' + req.body.owner + '/' + req.body.repo + '/issues/' + req.body.number + '/assignees?access_token=' + github.token, //req.body.token
+          url: 'https://api.github.com/repos/' + req.body.owner + '/' + req.body.repo + '/issues/' + req.body.number + '/assignees?access_token=' + req.user.github.token, //req.body.token
           body: {assignees: req.body.assignees}
         }, (err, response, body) => {
           res.redirect('/projects');
@@ -145,7 +145,7 @@ router.post('/api/github/createIssue', (req, res)=>{
           },
           method: 'PUT',
           json: true,
-          url: 'https://api.github.com/repos/' + req.body.owner + '/' + req.body.repo + '/collaborators/' + req.body.username + '?access_token=' + github.token //req.body.token
+          url: 'https://api.github.com/repos/' + req.body.owner + '/' + req.body.repo + '/collaborators/' + req.body.username + '?access_token=' + req.user.github.token //req.body.token
         }, (err, response, body) => {
           res.redirect('/projects');
         })
