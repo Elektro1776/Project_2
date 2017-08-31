@@ -22,7 +22,7 @@ module.exports = function(passport) {
     done(null, user);
   })
   passport.use(new GitHubStrategy({
-    clientID: github.id || process.env.GITHUB_ID,,
+    clientID: github.id || process.env.GITHUB_ID,
     clientSecret: github.secret || process.env.GITHUB_SECRET,
     callbackURL: "https://trill-board.herokuapp.com/auth/github/callback"
   },
