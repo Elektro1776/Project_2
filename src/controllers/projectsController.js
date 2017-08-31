@@ -6,7 +6,6 @@ var parse = require('parse-link-header');
 
 
 router.get('/projects', (req, res) => {
-  console.log(' REQ USER', req.user.github.token);
   let pageNumber = 1;
   request({
     headers: {
@@ -53,7 +52,6 @@ router.get('/projects', (req, res) => {
     }
 
     let pages = {"pageForward": nextPage, "pageBackward": prevPage};
-    console.log(pages)
     res.render('projects', { title: 'uTile', projects, pages});
   })
 });

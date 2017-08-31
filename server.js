@@ -77,5 +77,4 @@ app.get('/testcodesnipcreate', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log('SERVER IS LISTENING ON ', port);
 });
