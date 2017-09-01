@@ -24,7 +24,7 @@ const projectsRouter = require('./src/controllers/projectsController');
 const githubGetRoutes = require('./src/api/githubRoutes/githubRoutes.js');
 const userStoriesRouter = require('./src/controllers/userStoriesController');
 const slackRouter = require('./src/apps/slackController');
-// const authRouter = require('./src/controllers/authController');
+const authRouter = require('./src/controllers/authController');
 const sessionStore = new KnexSessionStore({
     knex: knex,
     tablename: 'sessions'
