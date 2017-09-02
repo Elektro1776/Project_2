@@ -1,40 +1,25 @@
 require("mocha-generators").install();
-var Nightmare = require("nightmare");
-var expect = require("chai").expect;
+const Nightmare = require("nightmare");
+const expect = require("chai").expect;
 
-// Mocha
-describe("Login to site", function() {
-  var nightmare;
-
-  // It runs before each test
-  beforeEach(function*() {
-    nightmare = Nightmare();
-
-    // Login to the site first
-    yield nightmare
-      .goto("https://example.project/login")
-      .type('form#login-form input[name="username"]', "test123")
-      .type('form#login-form input[name="password"]', "testpass")
-      .click('form#login-form input[type="submit"]');
-  });
-
-  it('Should see a title "Welcome back"', function(done) {
-    nightmare
-      .goto("https://example.project/")
+describe("Test Login", function() {
+  it("Should be able to auth a user", function*(done) {
+    this.timeout(20000);
+    var nightmare = Nightmare({ show: true });
+    var link = yield nightmare
+      .goto("http://localhost:3000")
+      .click('a[href="/auth/github"')
+      .type('input[id="login_field"]', "utile.testing@gmail.com")
+      .type('input[id="password"]', "thisisfortestinggithub")
+      .click('input[value="Sign in"]')
+      .wait('button[name="authorize"]')
+      .click('button[name="authorize"]')
+      .wait("div.jumbotron")
       .evaluate(function() {
-        return document.querySelector("h1").textContent;
+        return document.location.href;
       })
-      .end()
-      .then(function(title) {
-        // Chai
-        expect(title).to.equal("Welcome back");
-        done();
-      });
-  });
-
-  // It runs after each test
-  afterEach(function*() {
-    // End the Nightmare instance
-    yield nightmare.end();
+      .end();
+    expect(link).to.equal("http://localhost:3000/");
+    done();
   });
 });
