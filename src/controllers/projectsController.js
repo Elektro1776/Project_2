@@ -74,7 +74,7 @@ router.post('/projects', (req, res) => {
     },
     method: 'GET',
     json: true,
-    url: 'https://api.github.com/user/repos?access_token=' + github.token + '&per_page=5&sort=created&direction=desc&page=' + pageNumber,
+    url: 'https://api.github.com/user/repos?access_token=' + req.user.github.token + '&per_page=5&sort=created&direction=desc&page=' + pageNumber,
   }, (err, response, projects) => {
     // console.log(projects, " projects");
     // request({

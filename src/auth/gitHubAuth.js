@@ -1,4 +1,4 @@
-// const passport = require('passport');
+const passport = require('passport');
 var express = require('express');
 var GitHubStrategy = require('passport-github2').Strategy;
 var github = require('./ghkey.js') || null;
