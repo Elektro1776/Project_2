@@ -21,11 +21,23 @@ module.exports = function(passport) {
     // console.log(' WHEN IS DESERIALIZE CALLED ', );
     done(null, user);
   })
-  passport.use(new GitHubStrategy({
-    clientID: github.id ,
-    clientSecret: github.secret ,
-    callbackURL: "http:/localhost:3000/auth/github/callback"
-  },
+  let devHub
+  if (process.env.NODE_ENV === 'development') {
+    devHub = {
+      clientID: github.id ,
+      clientSecret: github.secret ,
+      callbackURL: "http://localhost:3000/auth/github/callback"
+    };
+
+  } else {
+    devHub = {
+      clientID: github.id ,
+      clientSecret: github.secret ,
+      callbackURL: "http://ec2-34-212-47-239.us-west-2.compute.amazonaws.com/auth/github/callback"
+    }
+  }
+  console.log(' WHAT IS DEV HUB', devHub);
+  passport.use(new GitHubStrategy(devHub,
   function(accessToken, refreshToken, profile, done) {
     if (profile) {
       const {id, username, email, provider} = profile;
