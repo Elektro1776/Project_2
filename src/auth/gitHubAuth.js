@@ -1,4 +1,4 @@
-// const passport = require('passport');
+const passport = require('passport');
 var express = require('express');
 var GitHubStrategy = require('passport-github2').Strategy;
 var github = require('./ghkey.js') || null;
@@ -22,8 +22,8 @@ module.exports = function(passport) {
     done(null, user);
   })
   passport.use(new GitHubStrategy({
-    clientID: github.id ,
-    clientSecret: github.secret ,
+    clientID: github.id,
+    clientSecret: github.secret,
     callbackURL: "http:/localhost:3000/auth/github/callback"
   },
   function(accessToken, refreshToken, profile, done) {
