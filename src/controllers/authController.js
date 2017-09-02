@@ -1,8 +1,8 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
+const GitHubStrategy = require("../auth/gitHubAuth");
+const SlackStrategy = require("../auth/slackAuth");
 // const GitLabStrategy = require('../auth/gitLabAuth');
-const GitHubStrategy = require('../auth/gitHubAuth');
-const SlackStrategy = require('../auth/slackAuth');
 // console.log(' WHAT IS THE STRATEGY', GitLabStrategy.authenticate);
 
 // router.get('/login', (req, res) => {
@@ -27,27 +27,27 @@ const SlackStrategy = require('../auth/slackAuth');
 //     res.json(req.user);
 // })
 //Github authentification routes
-router.get('/auth/github',
-  GitHubStrategy.authenticate('github', { scope: ['user:email'] })
+router.get(
+  "/auth/github",
+  GitHubStrategy.authenticate("github", { scope: ["user:email"] })
 );
 
-router.get('/auth/github/callback',
-  GitHubStrategy.authenticate('github', {
-    // successRedirect : '/',
-    failureRedirect: '/login'
+router.get(
+  "/auth/github/callback",
+  GitHubStrategy.authenticate("github", {
+    failureRedirect: "/login"
   }),
   (req, res) => {
-    console.log(' CALL BACK SUCCESSSS', req.user);
-    res.redirect('/')
+    res.redirect("/");
   }
-)
+);
 
-  // Slack authorization routes
-  // router.get('/auth/slack', SlackStrategy.authenticate('slack'));
-  // router.get('/auth/slack/callback',
-  //   SlackStrategy.authenticate('slack', { failureRedirect: '/login' }),
-  //   function(req, res) {
-  //     // Successful authentication, redirect home.
-  //     res.redirect('/');
-  //   });
+// Slack authorization routes
+// router.get('/auth/slack', SlackStrategy.authenticate('slack'));
+// router.get('/auth/slack/callback',
+//   SlackStrategy.authenticate('slack', { failureRedirect: '/login' }),
+//   function(req, res) {
+//     // Successful authentication, redirect home.
+//     res.redirect('/');
+//   });
 module.exports = router;

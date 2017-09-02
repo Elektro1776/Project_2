@@ -1,8 +1,7 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const sessionStore = require('../../server');
-// console.log(' DO WE HAVE SESSION STORE', sessionStore);
+const sessionStore = require("../../server");
 
 exports.dashboard = (req, res) => {
-  res.render('home', { title: 'uTile' })
-}
+  res.render("home", { title: "uTile" });
+};
