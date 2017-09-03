@@ -1,11 +1,5 @@
-// const express = require('express');
-// const router = express.Router();
-//
-// router.get('/login', (req, res) => {
-//   res.render()
-// })
-const dashboard = require('./index');
 
+const dashboard = require('./index');
 module.exports = (app, passport) => {
   app.get('/', isLoggedIn, dashboard);
 
@@ -14,11 +8,9 @@ module.exports = (app, passport) => {
   );
   app.get('/auth/github/callback',
     passport.authenticate('github', {
-
-      failureRedirect: '/projects'
+      failureRedirect: '/login'
     }),
     (req, res) => {
-      // console.log(' CALL BACK SUCCESSSS', req.user, new Date());
       setTimeout(function () {
         res.redirect('/')
 
@@ -38,7 +30,6 @@ module.exports = (app, passport) => {
           return next();
 
         }
-        // res.render('login')
         return res.redirect('/login');
     }
 }

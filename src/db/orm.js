@@ -32,10 +32,17 @@ module.exports = {
     // knex.select('utile_username', 'full_name', 'phone', 'email').from('User').where('isActive',1).timeout(1000, {cancel: true})
   },
   getUserStory(id) {
-     return knex('User_Story').where('project_title', id).then((results) => {
-       return results;
+     return knex.select()
+     .from('User_Story')
+     .where('project_title', id)
+     .then((results) => {
+       if (results !== null) {
+         console.log(' NO RESULTS????', results);
+         return results;
+       }
      }).catch((err) => {
-       console.log(' HUSTON ERR GETING USER STORY', err);
+
+       return console.error(' HUSTON ERR GETING USER STORY', err);
      })
     // knex.select('utile_username', 'full_name', 'phone', 'email').from('User').where('isActive',1).timeout(1000, {cancel: true})
   },

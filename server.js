@@ -63,8 +63,10 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 require('./src/routes/signup')(app, passport);
 
-app.use(userStoriesRouter);
+app.get('/userstories', userStoriesRouter);
+app.post('/userstories', userStoriesRouter)
 app.get('/projects', projectsRouter);
+app.post('/projects', projectsRouter)
 app.use(slackRouter);
 app.use(githubGetRoutes);
 
@@ -77,4 +79,5 @@ app.get('/testcodesnipcreate', (req, res) => {
 });
 
 app.listen(port, () => {
+  console.log(' SERVER STARTED ON PORT '+ port);
 });
