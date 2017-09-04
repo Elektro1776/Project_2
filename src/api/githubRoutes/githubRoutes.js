@@ -5,9 +5,9 @@ const router = express.Router();
 
 // Get issues
 router.post('/api/github/getIssues', (req, res)=>{
-  console.log(req.body, "line 8");
+  // console.log(req.body, "line 8");
   let currentUrl = 'https://api.github.com/repos/' + req.body.owner + '/' + req.body.repo + '/issues'
-  console.log(currentUrl, "line 10");
+  // console.log(currentUrl, "line 10");
   request({
     headers: {
       "Accept": "application/vnd.github.v3.full+json",
@@ -40,7 +40,7 @@ router.post('/api/github/createIssue', (req, res)=>{
     inputObj.body = body;
   };
   grabParametersCreateIssue(inputObj.title)
-  console.log(inputObj);
+  // console.log(inputObj);
   request({
     headers: {
       "Accept": "application/vnd.github.v3.full+json",
@@ -72,7 +72,7 @@ router.post('/api/github/createIssue', (req, res)=>{
       inputObj.base = base;
     };
     getParametersPull(inputObj.title);
-    console.log(inputObj);
+    // console.log(inputObj);
     request({
       headers: {
         "Accept": "application/vnd.github.v3.full+json",
@@ -85,7 +85,7 @@ router.post('/api/github/createIssue', (req, res)=>{
         head: inputObj.head,
         base: inputObj.base}
       }, (err, response, body) => {
-        console.log(' WHAT IS THE BODY?', body);
+        // console.log(' WHAT IS THE BODY?', body);
         res.redirect('/projects');
       })
     });
@@ -121,7 +121,7 @@ router.post('/api/github/createIssue', (req, res)=>{
           inputObj.number = number;
         };
         getParametersAssignIssues(inputObj.assignees);
-        console.log(inputObj);
+        // console.log(inputObj);
         request({
           headers: {
             "Accept": "application/vnd.github.v3.full+json",

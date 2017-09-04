@@ -8,7 +8,7 @@ module.exports = passport.use( new GitLabStrategy({
   },
   function(accessToken, refreshToken, profile, cb) {
     // TODO: add our schema method to create user or find user if they have already signed up.
-    console.log(' WHAT IS OUR ACCESS TOKEN???', accessToken, refreshToken, profile);
+    // console.log(' WHAT IS OUR ACCESS TOKEN???', accessToken, refreshToken, profile);
     // User.findOrCreate({gitlabId: profile.id}, function (err, user) {
     //   return cb(err, user);
     // });

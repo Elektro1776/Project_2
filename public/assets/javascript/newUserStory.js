@@ -31,7 +31,7 @@ const postToApi = function() {
     project_id: $('#project_id').text(),
     method: "create",
   };
-  console.log(' WHAT THE HELL IS THIS VALUE',  $('#project_id'));
+  // console.log(' WHAT THE HELL IS THIS VALUE',  $('#project_id'));
   let currentStory = validateUserInput(currentUserStory);
 
   if (currentStory === true) {
@@ -55,7 +55,7 @@ const postToApi = function() {
       project_id: $('#project_id').text().trim(),
 
     };
-    console.log(currentUserStory);
+    // console.log(currentUserStory);
     let newStory = `
       <div data-storyTitle="${currentUserStory.storyTitle}"
         data-storyDescription="${currentUserStory.storyDescription}"
@@ -66,7 +66,7 @@ const postToApi = function() {
       <p>${currentUserStory.storyTitle}</p></div>
 
       `;
-    console.log(newStory);
+    // console.log(newStory);
     switch (currentUserStory.selectedMatrixSection) {
       case "4":
         $("#firstQuadrant").append(newStory);
@@ -81,13 +81,14 @@ const postToApi = function() {
         $("#fourthQuadrant").append(newStory);
         break;
       default:
-        console.log("Not all who wander are lost");
+        // console.log("Not all who wander are lost");
     }
     $("#otherModal").modal("hide");
 
     //make POST request to send to database and handle with controller
+    // console.log(' WHAT IS THE LOCATION HREF', window.location.href);
     $.post(
-      "/userstories",
+      window.location.href,
       currentUserStory,
       function(data) {},
       'application/json'
@@ -127,7 +128,7 @@ const updateUserStory = function(currentStory) {
       .attr("data-storyduedate", $("#updateDate").val().trim())
       .attr("data-selectedmatrixsection", $("#updateMatrix").val());
 
-    console.log(currentStory);
+    // console.log(currentStory);
 
     switch ($(currentStory).attr("data-selectedmatrixsection")) {
       case "4":
@@ -143,7 +144,7 @@ const updateUserStory = function(currentStory) {
         $("#fourthQuadrant").append(currentStory);
         break;
       default:
-        console.log("Not all who wander are lost");
+        // console.log("Not all who wander are lost");
     }
     $("#otherModal").modal("hide");
   });
@@ -169,7 +170,7 @@ $(document).ready(function() {
   });
 
   $(".quadrant").on("click", ".userStory", function(event) {
-    console.log(this);
+    // console.log(this);
     let thisStory = null;
     thisStory = this;
     updateUserStory(thisStory);

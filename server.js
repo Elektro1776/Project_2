@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 const passport = require('passport');
 const session = require('express-session')
-const knex = require('knex')(require('./src/db/db_config.js'))
+const knex = require('knex')(require('./src/db/db_config.js').production)
 module.exports = {
   knex
 }
@@ -30,6 +30,7 @@ const sessionStore = new KnexSessionStore({
     tablename: 'sessions'
      // optional. Defaults to 'sessions'
 });
+app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', __dirname + '/src/views');
 app.engine('handlebars', exphbs({
   defaultLayout: __dirname + '/src/views/layouts/main.handlebars',
@@ -57,14 +58,16 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 
 require('./src/routes/signup')(app, passport);
 
-app.use(userStoriesRouter);
 app.get('/projects', projectsRouter);
+app.post('/projects', projectsRouter);
+
+app.use('/', userStoriesRouter);
+// app.post('/', userStoriesRouter)
 app.use(slackRouter);
 app.use(githubGetRoutes);
 
@@ -77,4 +80,5 @@ app.get('/testcodesnipcreate', (req, res) => {
 });
 
 app.listen(port, () => {
+  console.log(' SERVER STARTED ON PORT '+ port);
 });

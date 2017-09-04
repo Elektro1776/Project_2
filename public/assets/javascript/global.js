@@ -57,22 +57,22 @@ $('#myModal').on('shown.bs.modal', function () {
 // create click handler to send ajax GET request with the id from the button in
 // the body of the ajax request. On the userStoriesController log out what the
 // req.body is an you should see the id of the project that was clicked
-$('.projectButton').click(function(e) {
-  let projectId = $(this)[0].id;
-  console.log('PROJECT ID TO SEND', projectId);
-  //ajax shit;
-  $.ajax({
-    method: 'GET',
-    url: '/userstories'
-  }).done(function() {
-    window.location.href = `/userstories?project_id=${projectId}`
-    console.log(projectId,' WENT SOME WHERE???');
-  })
-
-
-
-
-})
+// $('.projectButton').click(function(e) {
+//   let projectId = $(this)[0].id;
+//   console.log('PROJECT ID TO SEND', projectId);
+//   //ajax shit;
+//   $.ajax({
+//     method: 'GET',
+//     url: `/userstories/project/${projectId}`
+//   }).done(function() {
+//     window.location.href = `/userstories/project/${projectId}`
+//     console.log(projectId,' WENT SOME WHERE???');
+//   })
+//
+//
+//
+//
+// })
 // $( init );
 
 // $(function init() {

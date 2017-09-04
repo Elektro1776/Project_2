@@ -12,7 +12,7 @@ $(document).ready(() => {
     collapseChild = $(collapseChild).children(".panel-collapse");
 
     $.post("/api/github/getIssues", currentObj, function(data) {
-      console.log(data);
+      // console.log(data);
       for (issues in data) {
         let assignees;
         let assigneesLink;

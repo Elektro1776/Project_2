@@ -20,7 +20,7 @@
     {{#each projects}}
     <div class="panel-group">
       <div class="panel panel-default">
-        <button id='{{id}}' class="projectButton glyphicon glyphicon-fullscreen btn btn-success" aria-hidden="true"></button>
+        <a id='{{id}}' href='/userstories/{{name}}/{{id}}' class="projectButton glyphicon glyphicon-fullscreen btn btn-success" aria-hidden="true"></a>
         <div class="panel-heading" {{!--data-toggle="collapse" --}} href="#collapse{{id}}">
           <h4 class="panel-title">
             <div {{!--data-toggle="collapse" --}} class='nameArg' href="#collapse{{id}}">{{name}}</div>
