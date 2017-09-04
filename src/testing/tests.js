@@ -4,10 +4,10 @@ const expect = require("chai").expect;
 
 describe("Test Login", function() {
   it("Should be able to auth a user", function*(done) {
-    this.timeout(12000);
+    this.timeout(120000);
     var nightmare = Nightmare({ show: true });
     yield nightmare
-      .goto("http://www.utiledevs.com")
+      .goto("http://localhost:3000/")
       .click('a[href="/auth/github"')
       .type('input[id="login_field"]', "utile.testing@gmail.com")
       .type('input[id="password"]', "thisisfortestinggithub")
@@ -19,7 +19,7 @@ describe("Test Login", function() {
       .end()
       .then(link => {
         expect(link).to.equal(
-          "http://ec2-34-212-47-239.us-west-2.compute.amazonaws.com/"
+          "http://localhost:3000/login"
         );
       });
   });
