@@ -29,7 +29,7 @@ module.exports = function(passport) {
     devHub = {
       clientID: github.id ,
       clientSecret: github.secret ,
-      callbackURL: "http://utiledevs.com/auth/github/callback"
+      callbackURL: "http://www.utiledevs.com/auth/github/callback"
     }
   }
   passport.use(new GitHubStrategy(devHub,
