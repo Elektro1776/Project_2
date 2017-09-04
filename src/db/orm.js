@@ -3,18 +3,16 @@ const crypto = require('crypto')
 const { knex } = require('../../server');
 module.exports = {
   createUser(profile) {
-    // console.log(id,username,authProvider)
     const { id, username, email, provider } = profile;
-    // console.log(' WHAT IS OUR ID?', id);
-    return knex('Authentication').where({
-      github_federation_id: id,
+    return knex('users').where({
+      github_id: id,
     }).then(user => {
       if (user.length === 0) {
-        console.log(' THERE IS NO USER', user);
-        return knex('Authentication').insert({
-          utile_username: username,
-          github_federation_id: id,
-          initial_federation: provider
+        // console.log(' THERE IS NO USER', user);
+        return knex('users').insert({
+          username: username,
+          github_id: id,
+          auth_provider: provider
         })
       } else {
         return
@@ -28,16 +26,15 @@ module.exports = {
     // knex.select('utile_username', 'full_name', 'phone', 'email').from('User').where('isActive',1).timeout(1000, {cancel: true})
   },
   getUser(id) {
-     return knex.select().from('User')
+     return knex.select().from('user')
     // knex.select('utile_username', 'full_name', 'phone', 'email').from('User').where('isActive',1).timeout(1000, {cancel: true})
   },
   getUserStory(id) {
      return knex.select()
-     .from('User_Story')
-     .where('project_title', id)
+     .from('user_stories')
+     .where('project_id', id)
      .then((results) => {
        if (results !== null) {
-         console.log(' NO RESULTS????', results);
          return results;
        }
      }).catch((err) => {
@@ -47,15 +44,16 @@ module.exports = {
     // knex.select('utile_username', 'full_name', 'phone', 'email').from('User').where('isActive',1).timeout(1000, {cancel: true})
   },
   createUserStory(userStory) {
-    // console.log(' WHAT IS OUR USER STORY?', userStory);
+    //NOTE: FOR SOME REASON KNEX/MYSQL does not like the date format sent from the client
+    // need to figure out what is up with that
     const { storyTitle, storyDescription, storyProgress, storyDueDate, selectedMatrixSection, project_id } = userStory
-    return knex('User_Story').insert({
+    return knex('user_stories').insert({
+      project_id: project_id,
       story_title: storyTitle,
-      story_description: storyDescription,
-      story_progress: storyProgress,
-      story_due_date: storyDueDate,
-      select_matrix_section: selectedMatrixSection,
-      project_title: project_id,
+      description: storyDescription,
+      status: storyProgress,
+      // due_date: storyDueDate,
+      rank: selectedMatrixSection,
      })
       .then((results) => {
       // console.log(' DO WE HAVE RESULTS', results);

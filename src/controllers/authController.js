@@ -37,7 +37,7 @@ router.get('/auth/github/callback', function () {
     failureRedirect: '/login'
   }),
   (req, res) => {
-    console.log(' CALL BACK SUCCESSSS', req.user);
+    // console.log(' CALL BACK SUCCESSSS', req.user);
     res.redirect('/')
   }
 });
