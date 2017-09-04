@@ -1,11 +1,16 @@
 # Project_2
 
 ## To get up and running follow below!
-  * fork repo
-  * git clone from your fork
-  * once cloned to your computer run `git remote add upstream https://github.com/Elektro1776/Project_2`
-  * You will now be able to track all the changes that get merged into the master repo
-  * In order to get the lastest updates run `git fetch upstream` && `git merge upstream/master`
-  * please pull down everyday you work on code so your sure you have the latest changes!
+If you have not gotten nighmarejs on your computer please run npm install not from the atom editor as there is an issue install the electron dependency when running install from atom terminal.
+
+After you have the latest packages you will need to find the config file in the `src/db/db_config.js` Modify the development section to reflect you local db config.
+
+Then find the knexfile.js and modify the development section there as well to reflect your local db settings.
+
+After all that jazz is set up you can run `knex migrate:latest --env development` this will create the tables on your local db to mess around with while developing.
+
+Finally to launch the app run `npm run dev` and you should be rockin and rollin! 
+
+please reach out if you have any problems!
   
   
